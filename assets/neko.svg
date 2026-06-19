@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 460" fill="none" role="img" aria-label="二次元风格的程序员 neko 猫咪吉祥物">
+  <defs>
+    <radialGradient id="neko-bg" cx="50%" cy="45%" r="62%">
+      <stop offset="0%" stop-color="#fff6ea"/>
+      <stop offset="100%" stop-color="#ffe3c4"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="200" cy="225" r="190" fill="url(#neko-bg)"/>
+  <circle cx="200" cy="225" r="186" fill="none" stroke="#ffd2a0" stroke-width="2" stroke-dasharray="2 12" opacity="0.7"/>
+
+  <path class="sparkle" d="M70 120 q0 -9 -4 -9 q4 0 4 -9 q0 9 4 9 q-4 0 -4 9 Z" fill="#ffd166" opacity="0.9"/>
+  <circle class="sparkle" cx="332" cy="150" r="4" fill="#2bb3a3" opacity="0.85"/>
+  <circle class="sparkle" cx="58" cy="300" r="3.5" fill="#ff8fa3" opacity="0.85"/>
+  <path class="sparkle" d="M330 330 q0 -7 -3 -7 q3 0 3 -7 q0 7 3 7 q-3 0 -3 7 Z" fill="#2bb3a3" opacity="0.7"/>
+
+  <ellipse cx="200" cy="432" rx="120" ry="17" fill="#e6c192" opacity="0.35"/>
+
+  <path d="M296 362 C 362 360 374 292 348 250 C 336 228 306 234 312 264 C 315 280 327 282 332 268" stroke="#f4a85a" stroke-width="30" stroke-linecap="round" fill="none"/>
+  <path d="M312 264 C 315 280 327 282 332 268" stroke="#fff6e8" stroke-width="22" stroke-linecap="round" fill="none"/>
+
+  <ellipse cx="200" cy="356" rx="100" ry="84" fill="#fde4c0" stroke="#4a3f38" stroke-width="3.5"/>
+  <path d="M270 300 Q302 320 302 360 Q302 412 252 426 L252 410 Q286 396 286 360 Q286 330 270 314 Z" fill="#f0c98a"/>
+  <ellipse cx="200" cy="378" rx="58" ry="54" fill="#fff6e8"/>
+
+  <ellipse cx="166" cy="420" rx="28" ry="19" fill="#fff6e8" stroke="#4a3f38" stroke-width="3.5"/>
+  <ellipse cx="234" cy="420" rx="28" ry="19" fill="#fff6e8" stroke="#4a3f38" stroke-width="3.5"/>
+  <path d="M158 426 q4 5 8 0 M166 428 q4 5 8 0" stroke="#e3c9a0" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M226 426 q4 5 8 0 M234 428 q4 5 8 0" stroke="#e3c9a0" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <path d="M126 250 Q200 276 274 250 L274 262 Q200 288 126 262 Z" fill="#2bb3a3" stroke="#4a3f38" stroke-width="2.5"/>
+  <path d="M200 268 q -14 0 -14 14 q0 12 14 18 q14 -6 14 -18 q0 -14 -14 -14 Z" fill="#ffd166" stroke="#4a3f38" stroke-width="2.5"/>
+  <line x1="200" y1="270" x2="200" y2="296" stroke="#c99a2e" stroke-width="2"/>
+  <circle cx="200" cy="293" r="2.8" fill="#4a3f38"/>
+  <path d="M194 272 q6 -4 12 0" stroke="#c99a2e" stroke-width="2" fill="none"/>
+
+  <circle cx="200" cy="168" r="100" fill="#fde4c0" stroke="#4a3f38" stroke-width="3.5"/>
+  <path d="M268 110 Q302 142 300 182 Q298 226 268 252 Q292 216 287 176 Q282 140 268 120 Z" fill="#f0c98a" opacity="0.6"/>
+
+  <path d="M118 118 L94 42 L180 104 Z" fill="#fde4c0" stroke="#4a3f38" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M122 110 L106 64 L168 102 Z" fill="#ffb7c8"/>
+  <path d="M282 118 L306 42 L220 104 Z" fill="#fde4c0" stroke="#4a3f38" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M278 110 L294 64 L232 102 Z" fill="#ffb7c8"/>
+
+  <path d="M200 94 L200 70" stroke="#f4a85a" stroke-width="9" stroke-linecap="round"/>
+  <path d="M176 100 L164 80" stroke="#f4a85a" stroke-width="8" stroke-linecap="round"/>
+  <path d="M224 100 L236 80" stroke="#f4a85a" stroke-width="8" stroke-linecap="round"/>
+  <path d="M122 150 q14 4 24 2" stroke="#f4a85a" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M278 150 q-14 4 -24 2" stroke="#f4a85a" stroke-width="5" stroke-linecap="round" fill="none"/>
+
+  <path d="M104 168 q-15 -4 -22 7 q13 2 22 -3 Z" fill="#fde4c0" stroke="#4a3f38" stroke-width="3"/>
+  <path d="M296 168 q15 -4 22 7 q-13 2 -22 -3 Z" fill="#fde4c0" stroke="#4a3f38" stroke-width="3"/>
+
+  <ellipse cx="132" cy="214" rx="16" ry="9" fill="#ffb7c8" opacity="0.55"/>
+  <ellipse cx="268" cy="214" rx="16" ry="9" fill="#ffb7c8" opacity="0.55"/>
+
+  <g class="neko-eye neko-eye-left">
+    <ellipse cx="158" cy="178" rx="24" ry="30" fill="#ffffff" stroke="#4a3f38" stroke-width="3.5"/>
+    <ellipse cx="158" cy="183" rx="18" ry="25" fill="#2bb3a3"/>
+    <ellipse cx="158" cy="172" rx="18" ry="11" fill="#86dccb"/>
+    <ellipse cx="158" cy="186" rx="9" ry="17" fill="#23302f"/>
+    <circle cx="150" cy="171" r="6.5" fill="#ffffff"/>
+    <circle cx="166" cy="195" r="3.2" fill="#ffffff"/>
+  </g>
+  <g class="neko-eye neko-eye-right">
+    <ellipse cx="242" cy="178" rx="24" ry="30" fill="#ffffff" stroke="#4a3f38" stroke-width="3.5"/>
+    <ellipse cx="242" cy="183" rx="18" ry="25" fill="#2bb3a3"/>
+    <ellipse cx="242" cy="172" rx="18" ry="11" fill="#86dccb"/>
+    <ellipse cx="242" cy="186" rx="9" ry="17" fill="#23302f"/>
+    <circle cx="234" cy="171" r="6.5" fill="#ffffff"/>
+    <circle cx="250" cy="195" r="3.2" fill="#ffffff"/>
+  </g>
+
+  <circle cx="158" cy="180" r="31" fill="none" stroke="#b5703a" stroke-width="3.5"/>
+  <circle cx="242" cy="180" r="31" fill="none" stroke="#b5703a" stroke-width="3.5"/>
+  <path d="M189 177 Q200 171 211 177" stroke="#b5703a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+  <path d="M127 174 L115 167" stroke="#b5703a" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M273 174 L285 167" stroke="#b5703a" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M138 166 q6 -6 12 -2" stroke="#ffffff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.85"/>
+
+  <path d="M191 208 L209 208 L200 219 Z" fill="#ff8fa3" stroke="#4a3f38" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <path d="M200 219 L200 228" stroke="#4a3f38" stroke-width="3" stroke-linecap="round"/>
+  <path d="M200 228 Q191 240 183 232" stroke="#4a3f38" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M200 228 Q209 240 217 232" stroke="#4a3f38" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <path d="M115 198 L72 192" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M114 210 L70 212" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M116 221 L74 230" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M285 198 L328 192" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M286 210 L330 212" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M284 221 L326 230" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

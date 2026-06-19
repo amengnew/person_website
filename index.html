@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>neko 的个人空间</title>
+  <meta name="description" content="一只会写代码的猫 neko，带你逛逛我的个人空间。" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🐾%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="nav" id="nav">
+    <a href="#hero" class="nav-brand" aria-label="返回顶部">
+      <span class="paw" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+          <ellipse cx="16" cy="22" rx="7" ry="6" fill="#f59342"/>
+          <ellipse cx="8" cy="14" rx="2.6" ry="3.2" fill="#f59342"/>
+          <ellipse cx="13" cy="9" rx="2.6" ry="3.2" fill="#f59342"/>
+          <ellipse cx="19" cy="9" rx="2.6" ry="3.2" fill="#f59342"/>
+          <ellipse cx="24" cy="14" rx="2.6" ry="3.2" fill="#f59342"/>
+        </svg>
+      </span>
+      <span class="nav-title">neko<span class="dot">.</span>dev</span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="主导航">
+      <a href="#about" class="nav-link">关于我</a>
+      <a href="#projects" class="nav-link">学过的项目</a>
+      <a href="#skills" class="nav-link">技能栈</a>
+      <a href="#contact" class="nav-link">联系我</a>
+    </nav>
+    <a class="nav-gh" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <!-- 编辑入口：把下面的文字换成你自己的自我介绍。 -->
+  <section class="hero band" id="hero">
+    <div class="hero-inner container">
+      <div class="hero-mascot" aria-hidden="true">
+        <!-- 内联 neko 吉祥物 SVG，眼睛会眨。独立副本见 assets/neko.svg -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 460" fill="none" role="img" aria-label="二次元风格的程序员 neko 猫咪吉祥物" class="neko-svg">
+          <defs>
+            <radialGradient id="neko-bg" cx="50%" cy="45%" r="62%">
+              <stop offset="0%" stop-color="#fff6ea"/>
+              <stop offset="100%" stop-color="#ffe3c4"/>
+            </radialGradient>
+          </defs>
+          <circle cx="200" cy="225" r="190" fill="url(#neko-bg)"/>
+          <circle cx="200" cy="225" r="186" fill="none" stroke="#ffd2a0" stroke-width="2" stroke-dasharray="2 12" opacity="0.7"/>
+          <path class="sparkle" d="M70 120 q0 -9 -4 -9 q4 0 4 -9 q0 9 4 9 q-4 0 -4 9 Z" fill="#ffd166" opacity="0.9"/>
+          <circle class="sparkle" cx="332" cy="150" r="4" fill="#2bb3a3" opacity="0.85"/>
+          <circle class="sparkle" cx="58" cy="300" r="3.5" fill="#ff8fa3" opacity="0.85"/>
+          <path class="sparkle" d="M330 330 q0 -7 -3 -7 q3 0 3 -7 q0 7 3 7 q-3 0 -3 7 Z" fill="#2bb3a3" opacity="0.7"/>
+          <ellipse cx="200" cy="432" rx="120" ry="17" fill="#e6c192" opacity="0.35"/>
+          <path d="M296 362 C 362 360 374 292 348 250 C 336 228 306 234 312 264 C 315 280 327 282 332 268" stroke="#f4a85a" stroke-width="30" stroke-linecap="round" fill="none"/>
+          <path d="M312 264 C 315 280 327 282 332 268" stroke="#fff6e8" stroke-width="22" stroke-linecap="round" fill="none"/>
+          <ellipse cx="200" cy="356" rx="100" ry="84" fill="#fde4c0" stroke="#4a3f38" stroke-width="3.5"/>
+          <path d="M270 300 Q302 320 302 360 Q302 412 252 426 L252 410 Q286 396 286 360 Q286 330 270 314 Z" fill="#f0c98a"/>
+          <ellipse cx="200" cy="378" rx="58" ry="54" fill="#fff6e8"/>
+          <ellipse cx="166" cy="420" rx="28" ry="19" fill="#fff6e8" stroke="#4a3f38" stroke-width="3.5"/>
+          <ellipse cx="234" cy="420" rx="28" ry="19" fill="#fff6e8" stroke="#4a3f38" stroke-width="3.5"/>
+          <path d="M158 426 q4 5 8 0 M166 428 q4 5 8 0" stroke="#e3c9a0" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M226 426 q4 5 8 0 M234 428 q4 5 8 0" stroke="#e3c9a0" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M126 250 Q200 276 274 250 L274 262 Q200 288 126 262 Z" fill="#2bb3a3" stroke="#4a3f38" stroke-width="2.5"/>
+          <path d="M200 268 q -14 0 -14 14 q0 12 14 18 q14 -6 14 -18 q0 -14 -14 -14 Z" fill="#ffd166" stroke="#4a3f38" stroke-width="2.5"/>
+          <line x1="200" y1="270" x2="200" y2="296" stroke="#c99a2e" stroke-width="2"/>
+          <circle cx="200" cy="293" r="2.8" fill="#4a3f38"/>
+          <path d="M194 272 q6 -4 12 0" stroke="#c99a2e" stroke-width="2" fill="none"/>
+          <circle cx="200" cy="168" r="100" fill="#fde4c0" stroke="#4a3f38" stroke-width="3.5"/>
+          <path d="M268 110 Q302 142 300 182 Q298 226 268 252 Q292 216 287 176 Q282 140 268 120 Z" fill="#f0c98a" opacity="0.6"/>
+          <path d="M118 118 L94 42 L180 104 Z" fill="#fde4c0" stroke="#4a3f38" stroke-width="3.5" stroke-linejoin="round"/>
+          <path d="M122 110 L106 64 L168 102 Z" fill="#ffb7c8"/>
+          <path d="M282 118 L306 42 L220 104 Z" fill="#fde4c0" stroke="#4a3f38" stroke-width="3.5" stroke-linejoin="round"/>
+          <path d="M278 110 L294 64 L232 102 Z" fill="#ffb7c8"/>
+          <path d="M200 94 L200 70" stroke="#f4a85a" stroke-width="9" stroke-linecap="round"/>
+          <path d="M176 100 L164 80" stroke="#f4a85a" stroke-width="8" stroke-linecap="round"/>
+          <path d="M224 100 L236 80" stroke="#f4a85a" stroke-width="8" stroke-linecap="round"/>
+          <path d="M122 150 q14 4 24 2" stroke="#f4a85a" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M278 150 q-14 4 -24 2" stroke="#f4a85a" stroke-width="5" stroke-linecap="round" fill="none"/>
+          <path d="M104 168 q-15 -4 -22 7 q13 2 22 -3 Z" fill="#fde4c0" stroke="#4a3f38" stroke-width="3"/>
+          <path d="M296 168 q15 -4 22 7 q-13 2 -22 -3 Z" fill="#fde4c0" stroke="#4a3f38" stroke-width="3"/>
+          <ellipse cx="132" cy="214" rx="16" ry="9" fill="#ffb7c8" opacity="0.55"/>
+          <ellipse cx="268" cy="214" rx="16" ry="9" fill="#ffb7c8" opacity="0.55"/>
+          <g class="neko-eye neko-eye-left">
+            <ellipse cx="158" cy="178" rx="24" ry="30" fill="#ffffff" stroke="#4a3f38" stroke-width="3.5"/>
+            <ellipse cx="158" cy="183" rx="18" ry="25" fill="#2bb3a3"/>
+            <ellipse cx="158" cy="172" rx="18" ry="11" fill="#86dccb"/>
+            <ellipse cx="158" cy="186" rx="9" ry="17" fill="#23302f"/>
+            <circle cx="150" cy="171" r="6.5" fill="#ffffff"/>
+            <circle cx="166" cy="195" r="3.2" fill="#ffffff"/>
+          </g>
+          <g class="neko-eye neko-eye-right">
+            <ellipse cx="242" cy="178" rx="24" ry="30" fill="#ffffff" stroke="#4a3f38" stroke-width="3.5"/>
+            <ellipse cx="242" cy="183" rx="18" ry="25" fill="#2bb3a3"/>
+            <ellipse cx="242" cy="172" rx="18" ry="11" fill="#86dccb"/>
+            <ellipse cx="242" cy="186" rx="9" ry="17" fill="#23302f"/>
+            <circle cx="234" cy="171" r="6.5" fill="#ffffff"/>
+            <circle cx="250" cy="195" r="3.2" fill="#ffffff"/>
+          </g>
+          <circle cx="158" cy="180" r="31" fill="none" stroke="#b5703a" stroke-width="3.5"/>
+          <circle cx="242" cy="180" r="31" fill="none" stroke="#b5703a" stroke-width="3.5"/>
+          <path d="M189 177 Q200 171 211 177" stroke="#b5703a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+          <path d="M127 174 L115 167" stroke="#b5703a" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M273 174 L285 167" stroke="#b5703a" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M138 166 q6 -6 12 -2" stroke="#ffffff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.85"/>
+          <path d="M191 208 L209 208 L200 219 Z" fill="#ff8fa3" stroke="#4a3f38" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M200 219 L200 228" stroke="#4a3f38" stroke-width="3" stroke-linecap="round"/>
+          <path d="M200 228 Q191 240 183 232" stroke="#4a3f38" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M200 228 Q209 240 217 232" stroke="#4a3f38" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M115 198 L72 192" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M114 210 L70 212" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M116 221 L74 230" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M285 198 L328 192" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M286 210 L330 212" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M284 221 L326 230" stroke="#4a3f38" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="hero-copy">
+        <div class="speech">
+          <span class="speech-text">喵～欢迎光临 neko 的个人空间！</span>
+        </div>
+        <h1 class="hero-title">你好，我是 <span class="hl">neko</span> 👋</h1>
+        <p class="hero-sub">
+          一只会敲代码的猫，白天 Debug、夜里观星。<br />
+          跟着我，一起逛逛我学过的项目和技术栈吧。
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">
+            看看我的项目
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-ghost">联系我</a>
+        </div>
+        <!-- 编辑入口：可以增删这几个小数据 -->
+        <dl class="hero-stats">
+          <div class="stat"><dt>敲代码</dt><dd><b>3</b> 年</dd></div>
+          <div class="stat"><dt>做过项目</dt><dd><b>12</b> 个</dd></div>
+          <div class="stat"><dt>收藏技术</dt><dd><b>15</b> 种</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 40 C 240 90 480 0 720 30 C 960 60 1200 90 1440 35 L1440 80 L0 80 Z" fill="#fff7ef"/></svg>
+    </div>
+  </section>
+
+  <!-- ===================== 关于我 ===================== -->
+  <!-- 编辑入口：改成你真实的个人简介、身份、爱好等。 -->
+  <section class="band" id="about">
+    <div class="container about-inner">
+      <div class="about-card">
+        <div class="about-avatar" aria-hidden="true">
+          <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
+            <circle cx="60" cy="60" r="58" fill="#ffe3c4"/>
+            <path d="M60 30 L60 22 M44 36 L38 28 M76 36 L82 28" stroke="#f4a85a" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="48" cy="56" r="6" fill="#23302f"/>
+            <circle cx="72" cy="56" r="6" fill="#23302f"/>
+            <path d="M52 74 Q60 82 68 74" stroke="#23302f" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M30 70 q-10 -2 -14 5 q9 1 14 -3 Z" fill="#f4a85a"/>
+            <path d="M90 70 q10 -2 14 5 q-9 1 -14 -3 Z" fill="#f4a85a"/>
+          </svg>
+        </div>
+        <div>
+          <h2 class="section-title">关于这只猫</h2>
+          <p class="about-text">
+            我是一名热爱编程的开发者，喜欢把奇思妙想变成跑得起来的代码。
+            从写第一行 Hello World 起，我就被创造的乐趣迷住了——这里记录了
+            我一路走来学过的项目、踩过的坑，还有那些让我怦然心动的技术。
+          </p>
+          <p class="about-text">
+            工作之外，我喜欢折腾开源项目、研究新技术，偶尔写写博客。
+            如果你也对编程感兴趣，欢迎来一起交流呀！
+          </p>
+          <ul class="about-tags">
+            <li>🐱 程序员</li>
+            <li>🚀 终身学习</li>
+            <li>☕ 咖啡驱动</li>
+            <li>🌙 夜猫子</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 学过的项目 ===================== -->
+  <!-- 编辑入口：把下面这些示例项目换成你真正学过/做过的项目。
+       每张卡片对应一个 .project-card，可自由增删。 -->
+  <section class="band band-alt" id="projects">
+    <div class="container">
+      <h2 class="section-title center">学过的项目</h2>
+      <p class="section-sub center">这些都是我亲手敲过、调过、跑起来的小作品。</p>
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 5h18v12H3zM3 21h18M9 17v4M15 17v4"/></svg>
+          </div>
+          <h3 class="project-name">个人博客系统</h3>
+          <p class="project-desc">用前端框架搭建的个人博客，支持 Markdown 写作、标签分类与暗色模式。</p>
+          <ul class="tag-list">
+            <li>JavaScript</li><li>CSS</li><li>Node.js</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
+            <a href="#" class="chip chip-ghost">演示</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 9l1-5h16l1 5M4 9h16v10H4zM9 13h6M9 16h6"/></svg>
+          </div>
+          <h3 class="project-name">电商后台管理</h3>
+          <p class="project-desc">一个商品、订单、用户三件套的后台系统，练习了增删改查与权限控制。</p>
+          <ul class="tag-list">
+            <li>Vue</li><li>Element UI</li><li>Axios</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
+            <a href="#" class="chip chip-ghost">演示</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-5.5A8 8 0 1 1 21 12z"/></svg>
+          </div>
+          <h3 class="project-name">实时聊天应用</h3>
+          <p class="project-desc">基于 WebSocket 的多人聊天室，支持实时消息、在线状态与历史记录。</p>
+          <ul class="tag-list">
+            <li>WebSocket</li><li>Node.js</li><li>Socket.IO</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
+            <a href="#" class="chip chip-ghost">演示</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 19V5M4 19h16M8 16V9M12 16v-5M16 16V7M20 16v-9"/></svg>
+          </div>
+          <h3 class="project-name">数据可视化看板</h3>
+          <p class="project-desc">把枯燥的数据变成漂亮的图表，练习了 ECharts 与响应式布局。</p>
+          <ul class="tag-list">
+            <li>ECharts</li><li>TypeScript</li><li>Canvas</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
+            <a href="#" class="chip chip-ghost">演示</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg>
+          </div>
+          <h3 class="project-name">待办清单 App</h3>
+          <p class="project-desc">一个清爽的待办应用，练习了组件化、本地存储与状态管理。</p>
+          <ul class="tag-list">
+            <li>React</li><li>LocalStorage</li><li>Hooks</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
+            <a href="#" class="chip chip-ghost">演示</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2zM9 21h6M10 17v2M14 17v2"/></svg>
+          </div>
+          <h3 class="project-name">天气查询小工具</h3>
+          <p class="project-desc">调用公开 API 查询城市天气，练习了异步请求与数据渲染。</p>
+          <ul class="tag-list">
+            <li>Fetch API</li><li>JSON</li><li>Promise</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
+            <a href="#" class="chip chip-ghost">演示</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 技能栈 ===================== -->
+  <!-- 编辑入口：换成你掌握的技能，按类别分组即可。 -->
+  <section class="band" id="skills">
+    <div class="container">
+      <h2 class="section-title center">技能栈</h2>
+      <p class="section-sub center">逛完项目，看看我背包里都装了哪些工具。</p>
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h3 class="skill-cat">前端</h3>
+          <ul class="skill-badges">
+            <li>HTML</li><li>CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Vue</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-cat">后端</h3>
+          <ul class="skill-badges">
+            <li>Node.js</li><li>Python</li><li>Express</li><li>REST API</li><li>SQL</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-cat">工具与协作</h3>
+          <ul class="skill-badges">
+            <li>Git</li><li>GitHub</li><li>Docker</li><li>Linux</li><li>VS Code</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 联系我 ===================== -->
+  <!-- 编辑入口：换成你真实的 GitHub、邮箱等联系方式。 -->
+  <section class="band band-alt" id="contact">
+    <div class="container contact-inner">
+      <div class="contact-card">
+        <h2 class="section-title center">来打个招呼吧</h2>
+        <p class="section-sub center">neko 很友善，不会挠人的（大概）。</p>
+        <div class="contact-list">
+          <a class="contact-item" href="https://github.com/" target="_blank" rel="noopener">
+            <span class="contact-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg></span>
+            <span class="contact-label"><b>GitHub</b><span>来踩踩我的仓库</span></span>
+          </a>
+          <a class="contact-item" href="mailto:hello@example.com">
+            <span class="contact-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4zM4 7l8 6 8-6"/></svg></span>
+            <span class="contact-label"><b>邮箱</b><span>hello@example.com</span></span>
+          </a>
+          <a class="contact-item" href="#hero">
+            <span class="contact-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span>
+            <span class="contact-label"><b>留言</b><span>顶部见，喵～</span></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="paw-prints" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22"><ellipse cx="16" cy="22" rx="7" ry="6" fill="#f59342"/><ellipse cx="8" cy="14" rx="2.6" ry="3.2" fill="#f59342"/><ellipse cx="13" cy="9" rx="2.6" ry="3.2" fill="#f59342"/><ellipse cx="19" cy="9" rx="2.6" ry="3.2" fill="#f59342"/><ellipse cx="24" cy="14" rx="2.6" ry="3.2" fill="#f59342"/></svg>
+      </div>
+      <p class="footer-text">© <span id="year"></span> neko 的个人空间 · 用 ❤️ 与代码搭建</p>
+    </div>
+  </footer>
+
+  <!-- 返回顶部 -->
+  <button class="to-top" id="toTop" aria-label="返回顶部">
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
