@@ -288,40 +288,21 @@
     });
   }
 
-  // ---------- 点击 neko 让它“喵”一声的小彩蛋 ----------
+  // ---------- 点击猫咪 emoji 让它"喵"一声的小彩蛋 ----------
+  var catEmoji = document.querySelector(".hero-cat-emoji");
   var mascot = document.querySelector(".hero-mascot");
-  if (mascot) {
-    var svg = mascot.querySelector(".neko-svg");
-    svg.style.cursor = "pointer";
+  if (catEmoji && mascot) {
     var meows = ["喵～", "喵呜！", "呼噜噜…", "喵(=^･ω･^=)", "Meow~", "Purr..."];
-    svg.addEventListener("click", function () {
+    catEmoji.addEventListener("click", function () {
       var bubble = document.createElement("div");
+      bubble.className = "meow-bubble";
       bubble.textContent = meows[Math.floor(Math.random() * meows.length)];
-      Object.assign(bubble.style, {
-        position: "absolute",
-        top: "8px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        background: "#fff",
-        border: "1.5px solid #f0dcc4",
-        color: "#e07b2c",
-        fontWeight: "700",
-        padding: "6px 14px",
-        borderRadius: "999px",
-        boxShadow: "0 6px 18px rgba(120,80,40,.15)",
-        fontSize: ".9rem",
-        zIndex: "5",
-        opacity: "0",
-        transition: "opacity .25s, transform .25s"
-      });
-      mascot.style.position = "relative";
       mascot.appendChild(bubble);
       requestAnimationFrame(function () {
-        bubble.style.opacity = "1";
-        bubble.style.transform = "translateX(-50%) translateY(-6px)";
+        bubble.classList.add("show");
       });
       setTimeout(function () {
-        bubble.style.opacity = "0";
+        bubble.classList.remove("show");
         setTimeout(function () {
           if (bubble.parentNode) bubble.parentNode.removeChild(bubble);
         }, 260);
