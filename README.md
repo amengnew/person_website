@@ -1,7 +1,16 @@
-# neko 的个人空间
+# Zhihao Meng · 个人主页
 
-一只会写代码的猫 **neko** 的个人网站，用来介绍自己、展示学过的项目与技术栈。
-纯静态（HTML + CSS + JS，无构建步骤），可直接托管在 GitHub Pages。
+这是 Zhihao Meng 的个人网站，展示工作经历、项目、技能栈与教育背景。
+纯静态（HTML + CSS + JS，无构建步骤），托管在 GitHub Pages。
+网站保留着 neko 猫咪吉祥物（眼睛会眨、点击会"喵"），并支持中英双语切换。
+
+## 特性
+
+- 中英双语切换：导航栏右侧的语言按钮一键切换，选择会保存在 localStorage
+- 真实简历内容：工作经历（比特大陆）、项目经历、技能栈、教育经历
+- neko 吉祥物 SVG：眨眼、浮动动画，点击"喵"一声的小彩蛋
+- 响应式布局：桌面 / 平板 / 手机自适应
+- 纯原生三件套，无依赖、无打包工具
 
 ## 本地预览
 
@@ -11,52 +20,32 @@
 python3 -m http.server 8000
 ```
 
-然后浏览器打开 <http://localhost:8000>。
+然后浏览器打开 http://localhost:8000。
 
 ## 自定义内容
 
-所有可编辑的位置都在 `index.html` 里用 `<!-- 编辑入口 -->` 标注了，按需修改即可：
+所有可翻译文案通过 data-i18n / data-i18n-html 标注，译文集中在 script.js 的 I18N 字典（zh 与 en 两个对象）里，修改即可。HTML 中默认写的是中文，作为无 JS 时的兜底显示。
 
-- **自我介绍 / 标题**：hero 区的文字与小数据（年限、项目数等）
-- **关于我**：个人简介、身份标签
-- **学过的项目**：每个 `.project-card` 对应一个项目，增删自由
-- **技能栈**：按类别分组的技能徽章
-- **联系方式**：GitHub 地址、邮箱等
+- 工作 / 项目 / 技能 / 教育：对应 index.html 里的各个 section，增删自由。
+- 联系方式：GitHub、邮箱、电话在联系区域。
+- 自我介绍 / 数据：hero 区的文字与统计数据。
 
-吉祥物是一只二次元风格的程序员猫咪，以 SVG 内联在首页（眼睛会眨、点击会“喵”），
-独立副本存放在 `assets/neko.svg`。想换成自己的图片，把图片放进 `assets/`，
-再把 hero 区的内联 SVG 替换成 `<img>` 即可。
+吉祥物是一只二次元风格的程序员猫咪，以 SVG 内联在首页，独立副本存放在 assets/neko.svg。想换成自己的图片，把图片放进 assets/，再把 hero 区的内联 SVG 替换成 img 即可。
 
 ## 通过 GitHub Pages 部署
 
-1. 在 GitHub 上新建一个仓库（例如 `person_website`），**不要**勾选自动生成 README。
-2. 在本地仓库关联远程并推送：
+仓库已关联 https://github.com/amengnew/person_website.git，并在 GitHub Pages 中配置从 main 分支根目录部署。之后每次 git push 到 main，网站都会自动更新：
 
-   ```bash
-   git remote add origin https://github.com/<你的用户名>/person_website.git
-   git branch -M main
-   git push -u origin main
-   ```
-
-3. 打开仓库的 **Settings → Pages**。
-4. 在 **Source** 里选择 `Deploy from a branch`，分支选 **main**、目录选 **/ (root)**，保存。
-5. 等待 1~2 分钟，页面顶部会显示你的网址：
-
-   ```
-   https://<你的用户名>.github.io/person_website/
-   ```
-
-之后每次 `git push` 到 `main`，网站都会自动更新。
-
-> 如果想把仓库直接命名为 `<你的用户名>.github.io`，则访问地址会是
-> `https://<你的用户名>.github.io/`（没有仓库路径后缀）。
+```
+https://amengnew.github.io/person_website/
+```
 
 ## 技术构成
 
 纯原生三件套，无依赖、无打包工具：
 
-- `index.html`：页面结构，内联 neko 吉祥物 SVG
-- `styles.css`：样式、响应式布局与动画（眨眼、浮动、滚动入场）
-- `script.js`：导航交互、滚动高亮、返回顶部等
+- index.html：页面结构，内联 neko 吉祥物 SVG，data-i18n 双语标注
+- styles.css：样式、响应式布局与动画（眨眼、浮动、滚动入场）
+- script.js：导航交互、滚动高亮、返回顶部、中英双语切换
 
 MIT License

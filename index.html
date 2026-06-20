@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>neko 的个人空间</title>
-  <meta name="description" content="一只会写代码的猫 neko，带你逛逛我的个人空间。" />
+  <title>Zhihao Meng · 个人主页</title>
+  <meta name="description" content="Zhihao Meng — 软件开发工程师，专注于分布式系统与 LLM Agent 平台。" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🐾%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,15 +24,18 @@
           <ellipse cx="24" cy="14" rx="2.6" ry="3.2" fill="#f59342"/>
         </svg>
       </span>
-      <span class="nav-title">neko<span class="dot">.</span>dev</span>
+      <span class="nav-title">Zhihao Meng<span class="dot">.</span>dev</span>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="主导航">
-      <a href="#about" class="nav-link">关于我</a>
-      <a href="#projects" class="nav-link">学过的项目</a>
-      <a href="#skills" class="nav-link">技能栈</a>
-      <a href="#contact" class="nav-link">联系我</a>
+      <a href="#about" class="nav-link" data-i18n="nav.about">关于我</a>
+      <a href="#experience" class="nav-link" data-i18n="nav.experience">工作经历</a>
+      <a href="#projects" class="nav-link" data-i18n="nav.projects">项目经历</a>
+      <a href="#skills" class="nav-link" data-i18n="nav.skills">技能栈</a>
+      <a href="#education" class="nav-link" data-i18n="nav.education">教育经历</a>
+      <a href="#contact" class="nav-link" data-i18n="nav.contact">联系我</a>
     </nav>
-    <a class="nav-gh" href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">EN</button>
+    <a class="nav-gh" href="https://github.com/amengnew" target="_blank" rel="noopener" aria-label="GitHub">
       <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
@@ -41,7 +44,6 @@
   </header>
 
   <!-- ===================== HERO ===================== -->
-  <!-- 编辑入口：把下面的文字换成你自己的自我介绍。 -->
   <section class="hero band" id="hero">
     <div class="hero-inner container">
       <div class="hero-mascot" aria-hidden="true">
@@ -125,25 +127,21 @@
       </div>
       <div class="hero-copy">
         <div class="speech">
-          <span class="speech-text">喵～欢迎光临 neko 的个人空间！</span>
+          <span class="speech-text" data-i18n="hero.speech">喵～欢迎光临 Zhihao 的个人空间！</span>
         </div>
-        <h1 class="hero-title">你好，我是 <span class="hl">neko</span> 👋</h1>
-        <p class="hero-sub">
-          一只会敲代码的猫，白天 Debug、夜里观星。<br />
-          跟着我，一起逛逛我学过的项目和技术栈吧。
-        </p>
+        <h1 class="hero-title" data-i18n-html="hero.title">你好，我是 <span class="hl">Zhihao Meng</span> 👋</h1>
+        <p class="hero-sub" data-i18n-html="hero.sub">软件开发工程师，专注于分布式系统与 LLM Agent 平台。<br />白天写后端，夜里陪猫咪 Debug。</p>
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary">
-            看看我的项目
+            <span data-i18n="hero.ctaPrimary">看看我的项目</span>
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a href="#contact" class="btn btn-ghost">联系我</a>
+          <a href="#contact" class="btn btn-ghost" data-i18n="hero.ctaGhost">联系我</a>
         </div>
-        <!-- 编辑入口：可以增删这几个小数据 -->
         <dl class="hero-stats">
-          <div class="stat"><dt>敲代码</dt><dd><b>3</b> 年</dd></div>
-          <div class="stat"><dt>做过项目</dt><dd><b>12</b> 个</dd></div>
-          <div class="stat"><dt>收藏技术</dt><dd><b>15</b> 种</dd></div>
+          <div class="stat"><dt data-i18n="hero.stat1.label">工作经验</dt><dd><b>1+</b> <span data-i18n="hero.stat1.unit">年</span></dd></div>
+          <div class="stat"><dt data-i18n="hero.stat2.label">交付项目</dt><dd><b>10+</b></dd></div>
+          <div class="stat"><dt data-i18n="hero.stat3.label">学历</dt><dd><b data-i18n="hero.stat3.value">硕士</b></dd></div>
         </dl>
       </div>
     </div>
@@ -153,7 +151,6 @@
   </section>
 
   <!-- ===================== 关于我 ===================== -->
-  <!-- 编辑入口：改成你真实的个人简介、身份、爱好等。 -->
   <section class="band" id="about">
     <div class="container about-inner">
       <div class="about-card">
@@ -169,176 +166,175 @@
           </svg>
         </div>
         <div>
-          <h2 class="section-title">关于这只猫</h2>
-          <p class="about-text">
-            我是一名热爱编程的开发者，喜欢把奇思妙想变成跑得起来的代码。
-            从写第一行 Hello World 起，我就被创造的乐趣迷住了——这里记录了
-            我一路走来学过的项目、踩过的坑，还有那些让我怦然心动的技术。
-          </p>
-          <p class="about-text">
-            工作之外，我喜欢折腾开源项目、研究新技术，偶尔写写博客。
-            如果你也对编程感兴趣，欢迎来一起交流呀！
-          </p>
+          <h2 class="section-title" data-i18n="about.title">关于我</h2>
+          <p class="about-text" data-i18n="about.p1">我是 Zhihao Meng，一名软件开发工程师，现就职于北京比特大陆。喜欢把复杂的需求拆解成跑得起来的系统，从分布式后端到 LLM Agent 平台都有动手实践。</p>
+          <p class="about-text" data-i18n="about.p2">工作之外，我关注开源与新技术，喜欢折腾 AI 工程化与可观测性。如果你也对这些方向感兴趣，欢迎来交流！</p>
           <ul class="about-tags">
-            <li>🐱 程序员</li>
-            <li>🚀 终身学习</li>
-            <li>☕ 咖啡驱动</li>
-            <li>🌙 夜猫子</li>
+            <li data-i18n="about.tag1">🐱 后端工程师</li>
+            <li data-i18n="about.tag2">🚀 LLM Agent 平台</li>
+            <li data-i18n="about.tag3">☕ 咖啡驱动</li>
+            <li data-i18n="about.tag4">🌙 夜猫子</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===================== 学过的项目 ===================== -->
-  <!-- 编辑入口：把下面这些示例项目换成你真正学过/做过的项目。
-       每张卡片对应一个 .project-card，可自由增删。 -->
-  <section class="band band-alt" id="projects">
+  <!-- ===================== 工作经历 ===================== -->
+  <section class="band band-alt" id="experience">
     <div class="container">
-      <h2 class="section-title center">学过的项目</h2>
-      <p class="section-sub center">这些都是我亲手敲过、调过、跑起来的小作品。</p>
+      <h2 class="section-title center" data-i18n="exp.title">工作经历</h2>
+      <p class="section-sub center" data-i18n="exp.sub">在比特大陆，我从 OA 分布式系统一路做到 Agent SaaS 平台。</p>
+      <div class="exp-list">
+        <article class="exp-card">
+          <div class="exp-head">
+            <div class="exp-role">
+              <h3 class="exp-company" data-i18n="exp.bitmain.company">北京比特大陆科技有限公司</h3>
+              <p class="exp-position" data-i18n="exp.bitmain.role">软件开发工程师 · 北京</p>
+            </div>
+            <span class="exp-period" data-i18n="exp.bitmain.period">2025.05 – 至今</span>
+          </div>
+          <ul class="exp-bullets">
+            <li data-i18n="exp.bitmain.b1">参与 OA 领域分布式系统研发（Spring 生态、Redis、Kafka/RabbitMQ、MySQL、容器化、Kubernetes），覆盖工作流中心、人事及相关业务模块；参与多租户 Agent SaaS 平台，负责 Agent 运行时与平台能力扩展。</li>
+            <li data-i18n="exp.bitmain.b2">负责 10+ 个项目的需求分析、方案设计与交付，跟进线上问题排查并持续迭代优化。</li>
+            <li data-i18n="exp.bitmain.b3">落地低代码工作流脚手架与出站 API 能力，实现工作流、数据与接口的端到端可配置。</li>
+            <li data-i18n="exp.bitmain.b4">为 Agent 集成多模态工具，实现上下文记忆，并通过技能平台扩展能力。</li>
+            <li data-i18n="exp.bitmain.b5">搭建平台网关，并基于阿里云实现网关容量的弹性伸缩。</li>
+            <li data-i18n="exp.bitmain.b6">实现计费模块：接入 Token 用量计量，结合用量数据自动扣费。</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 项目经历 ===================== -->
+  <section class="band" id="projects">
+    <div class="container">
+      <h2 class="section-title center" data-i18n="proj.title">项目经历</h2>
+      <p class="section-sub center" data-i18n="proj.sub">这些是我亲手设计、敲过、跑起来的系统。</p>
       <div class="project-grid">
         <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 5h18v12H3zM3 21h18M9 17v4M15 17v4"/></svg>
+          <div class="project-head">
+            <div class="project-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2zM9 21h6M10 17v2M14 17v2"/></svg>
+            </div>
+            <div>
+              <h3 class="project-name" data-i18n="proj.agent.name">多租户 Agent SaaS 平台</h3>
+              <p class="project-period" data-i18n="proj.agent.period">2026.03 – 2026.05</p>
+            </div>
           </div>
-          <h3 class="project-name">个人博客系统</h3>
-          <p class="project-desc">用前端框架搭建的个人博客，支持 Markdown 写作、标签分类与暗色模式。</p>
           <ul class="tag-list">
-            <li>JavaScript</li><li>CSS</li><li>Node.js</li>
+            <li>FastAPI</li><li>LangGraph</li><li>PostgreSQL</li><li>Redis</li><li>Kafka</li>
           </ul>
-          <div class="project-links">
-            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
-            <a href="#" class="chip chip-ghost">演示</a>
-          </div>
+          <ul class="project-bullets">
+            <li data-i18n="proj.agent.b1">平台 + Agent 双服务多租户架构：平台负责鉴权、网关与计费，Agent 运行在隔离的用户环境中；Agent 侧基于 LangGraph 实现状态机编排，支持工具调用与 RAG。</li>
+            <li data-i18n="proj.agent.b2">PostgreSQL 存储账户与交易流水，Redis 用于缓存与接口限流，Kafka 承载异步用量事件，将计费与对话链路解耦。</li>
+            <li data-i18n="proj.agent.b3">平台服务（FastAPI）：用户鉴权、网关代理、沙箱生命周期管理与计费模块；计费支持按模型与 Token 维度扩展定价。</li>
+            <li data-i18n="proj.agent.b4">Agent 运行时（LangGraph）：编排、工具调用与多模态交互。</li>
+          </ul>
         </article>
 
         <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 9l1-5h16l1 5M4 9h16v10H4zM9 13h6M9 16h6"/></svg>
+          <div class="project-head">
+            <div class="project-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 19V5M4 19h16M8 16V9M12 16v-5M16 16V7M20 16v-9"/></svg>
+            </div>
+            <div>
+              <h3 class="project-name" data-i18n="proj.nft.name">联盟链 NFT 交易平台</h3>
+              <p class="project-period" data-i18n="proj.nft.period">2025.10 – 2026.03</p>
+            </div>
           </div>
-          <h3 class="project-name">电商后台管理</h3>
-          <p class="project-desc">一个商品、订单、用户三件套的后台系统，练习了增删改查与权限控制。</p>
           <ul class="tag-list">
-            <li>Vue</li><li>Element UI</li><li>Axios</li>
+            <li>Spring Cloud</li><li>Gateway</li><li>Nacos</li><li>Sentinel</li>
           </ul>
-          <div class="project-links">
-            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
-            <a href="#" class="chip chip-ghost">演示</a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-5.5A8 8 0 1 1 21 12z"/></svg>
-          </div>
-          <h3 class="project-name">实时聊天应用</h3>
-          <p class="project-desc">基于 WebSocket 的多人聊天室，支持实时消息、在线状态与历史记录。</p>
-          <ul class="tag-list">
-            <li>WebSocket</li><li>Node.js</li><li>Socket.IO</li>
+          <ul class="project-bullets">
+            <li data-i18n="proj.nft.b1">覆盖铸造/上架、订单与支付、链上铸造/转账异步确认、盲盒与合成的端到端平台；微服务 + 网关分离读写与链适配。</li>
+            <li data-i18n="proj.nft.b2">服务发现配合熔断限流应对峰值流量，形成从订单、支付到链上操作再到订单/NFT 状态更新的闭环。</li>
+            <li data-i18n="proj.nft.b3">负责核心模块从 0 到生产上线；公共库含分布式锁、统一异常处理与责任链模式；分片任务与缓存调优用于关单与热点查询。</li>
           </ul>
-          <div class="project-links">
-            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
-            <a href="#" class="chip chip-ghost">演示</a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 19V5M4 19h16M8 16V9M12 16v-5M16 16V7M20 16v-9"/></svg>
-          </div>
-          <h3 class="project-name">数据可视化看板</h3>
-          <p class="project-desc">把枯燥的数据变成漂亮的图表，练习了 ECharts 与响应式布局。</p>
-          <ul class="tag-list">
-            <li>ECharts</li><li>TypeScript</li><li>Canvas</li>
-          </ul>
-          <div class="project-links">
-            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
-            <a href="#" class="chip chip-ghost">演示</a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg>
-          </div>
-          <h3 class="project-name">待办清单 App</h3>
-          <p class="project-desc">一个清爽的待办应用，练习了组件化、本地存储与状态管理。</p>
-          <ul class="tag-list">
-            <li>React</li><li>LocalStorage</li><li>Hooks</li>
-          </ul>
-          <div class="project-links">
-            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
-            <a href="#" class="chip chip-ghost">演示</a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2zM9 21h6M10 17v2M14 17v2"/></svg>
-          </div>
-          <h3 class="project-name">天气查询小工具</h3>
-          <p class="project-desc">调用公开 API 查询城市天气，练习了异步请求与数据渲染。</p>
-          <ul class="tag-list">
-            <li>Fetch API</li><li>JSON</li><li>Promise</li>
-          </ul>
-          <div class="project-links">
-            <a href="#" class="chip"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>代码</a>
-            <a href="#" class="chip chip-ghost">演示</a>
-          </div>
         </article>
       </div>
     </div>
   </section>
 
   <!-- ===================== 技能栈 ===================== -->
-  <!-- 编辑入口：换成你掌握的技能，按类别分组即可。 -->
-  <section class="band" id="skills">
+  <section class="band band-alt" id="skills">
     <div class="container">
-      <h2 class="section-title center">技能栈</h2>
-      <p class="section-sub center">逛完项目，看看我背包里都装了哪些工具。</p>
+      <h2 class="section-title center" data-i18n="skill.title">技能栈</h2>
+      <p class="section-sub center" data-i18n="skill.sub">逛完项目，看看我背包里都装了哪些工具。</p>
       <div class="skill-groups">
         <div class="skill-group">
-          <h3 class="skill-cat">前端</h3>
+          <h3 class="skill-cat" data-i18n="skill.lang">编程语言</h3>
           <ul class="skill-badges">
-            <li>HTML</li><li>CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Vue</li>
+            <li>Java</li><li>Python</li><li>SQL (MySQL)</li><li>LaTeX</li><li>Solidity (basic)</li>
           </ul>
         </div>
         <div class="skill-group">
-          <h3 class="skill-cat">后端</h3>
+          <h3 class="skill-cat" data-i18n="skill.framework">框架与中间件</h3>
           <ul class="skill-badges">
-            <li>Node.js</li><li>Python</li><li>Express</li><li>REST API</li><li>SQL</li>
+            <li>Spring / Spring MVC</li><li>FastAPI</li><li>LangChain / LangGraph</li><li>Redis</li><li>Kafka / RabbitMQ</li><li>PostgreSQL</li><li>Spring Cloud Gateway</li><li>Nacos</li><li>Sentinel</li>
           </ul>
         </div>
         <div class="skill-group">
-          <h3 class="skill-cat">工具与协作</h3>
+          <h3 class="skill-cat" data-i18n="skill.llm">LLM / 智能体</h3>
           <ul class="skill-badges">
-            <li>Git</li><li>GitHub</li><li>Docker</li><li>Linux</li><li>VS Code</li>
+            <li>流式接口</li><li>重试 / 限流 / 熔断</li><li>多模型路由</li><li>RAG 与工具调用</li><li>提示词工程</li><li>轻量评测</li><li>可观测性</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3 class="skill-cat" data-i18n="skill.tools">工具</h3>
+          <ul class="skill-badges">
+            <li>Git</li><li>Docker / Kubernetes</li><li>MCP</li><li>Cursor</li><li>Codex</li><li>Unix shell</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ===================== 教育经历 ===================== -->
+  <section class="band" id="education">
+    <div class="container">
+      <h2 class="section-title center" data-i18n="edu.title">教育经历</h2>
+      <p class="section-sub center" data-i18n="edu.sub">从土木工程到计算机科学，一路跨学科探索。</p>
+      <div class="edu-grid">
+        <article class="edu-card">
+          <div class="edu-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 10L12 5 2 10l10 5 10-5zM6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
+          </div>
+          <h3 class="edu-school" data-i18n="edu.bristol.school">University of Bristol</h3>
+          <p class="edu-degree" data-i18n="edu.bristol.degree">计算机科学 硕士</p>
+          <span class="edu-period" data-i18n="edu.bristol.period">2024.11 毕业</span>
+        </article>
+        <article class="edu-card">
+          <div class="edu-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>
+          </div>
+          <h3 class="edu-school" data-i18n="edu.csu.school">中南大学</h3>
+          <p class="edu-degree" data-i18n="edu.csu.degree">土木工程 学士</p>
+          <span class="edu-period" data-i18n="edu.csu.period">2022.06 毕业</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== 联系我 ===================== -->
-  <!-- 编辑入口：换成你真实的 GitHub、邮箱等联系方式。 -->
   <section class="band band-alt" id="contact">
     <div class="container contact-inner">
       <div class="contact-card">
-        <h2 class="section-title center">来打个招呼吧</h2>
-        <p class="section-sub center">neko 很友善，不会挠人的（大概）。</p>
+        <h2 class="section-title center" data-i18n="contact.title">来打个招呼吧</h2>
+        <p class="section-sub center" data-i18n="contact.sub">neko 很友善，不会挠人的（大概）。</p>
         <div class="contact-list">
-          <a class="contact-item" href="https://github.com/" target="_blank" rel="noopener">
+          <a class="contact-item" href="https://github.com/amengnew" target="_blank" rel="noopener">
             <span class="contact-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg></span>
-            <span class="contact-label"><b>GitHub</b><span>来踩踩我的仓库</span></span>
+            <span class="contact-label"><b>GitHub</b><span>github.com/amengnew</span></span>
           </a>
-          <a class="contact-item" href="mailto:hello@example.com">
+          <a class="contact-item" href="mailto:717333759@qq.com">
             <span class="contact-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4zM4 7l8 6 8-6"/></svg></span>
-            <span class="contact-label"><b>邮箱</b><span>hello@example.com</span></span>
+            <span class="contact-label"><b data-i18n="contact.email">邮箱</b><span>717333759@qq.com</span></span>
           </a>
-          <a class="contact-item" href="#hero">
-            <span class="contact-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span>
-            <span class="contact-label"><b>留言</b><span>顶部见，喵～</span></span>
+          <a class="contact-item" href="tel:+8615942594429">
+            <span class="contact-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+            <span class="contact-label"><b data-i18n="contact.phone">电话</b><span>+86 15942594429</span></span>
           </a>
         </div>
       </div>
@@ -351,7 +347,7 @@
       <div class="paw-prints" aria-hidden="true">
         <svg viewBox="0 0 32 32" width="22" height="22"><ellipse cx="16" cy="22" rx="7" ry="6" fill="#f59342"/><ellipse cx="8" cy="14" rx="2.6" ry="3.2" fill="#f59342"/><ellipse cx="13" cy="9" rx="2.6" ry="3.2" fill="#f59342"/><ellipse cx="19" cy="9" rx="2.6" ry="3.2" fill="#f59342"/><ellipse cx="24" cy="14" rx="2.6" ry="3.2" fill="#f59342"/></svg>
       </div>
-      <p class="footer-text">© <span id="year"></span> neko 的个人空间 · 用 ❤️ 与代码搭建</p>
+      <p class="footer-text" data-i18n="footer.text">© <span id="year"></span> Zhihao Meng · 用 ❤️ 与代码搭建</p>
     </div>
   </footer>
 
