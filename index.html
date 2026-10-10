@@ -1,17 +1,32 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zhihao Meng · 个人主页</title>
-  <meta name="description" content="Zhihao Meng — 开发工程师，专注 LLM Agent 平台、RAG 与多智能体系统。" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🐱%3C/text%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta name="description" content="Zhihao Meng — 开发工程师，专注 LLM Agent 平台、RAG 与多智能体系统。" />
+  <meta name="keywords" content="Zhihao Meng,开发工程师,LLM Agent,RAG,多智能体,Agent 编排,Token 计费" />
+  <meta name="author" content="Zhihao Meng" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://amengnew.github.io/person_website/" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Zhihao Meng · 个人主页" />
+  <meta property="og:description" content="开发工程师，专注 LLM Agent 平台、RAG 与多智能体工程化。" />
+  <meta property="og:url" content="https://amengnew.github.io/person_website/" />
+  <meta property="og:locale" content="zh_CN" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Zhihao Meng · 个人主页" />
+  <meta name="twitter:description" content="开发工程师，专注 LLM Agent 平台、RAG 与多智能体工程化。" />
+  <!-- Font preload -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" /></noscript>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <a href="#main-content" class="skip-link" aria-label="跳到主要内容">跳到主要内容</a>
+
   <!-- 顶部导航 -->
   <header class="nav" id="nav">
     <a href="#hero" class="nav-brand" aria-label="返回顶部">
@@ -20,6 +35,7 @@
     </a>
     <nav class="nav-links" id="navLinks" aria-label="主导航">
       <a href="#about" class="nav-link" data-i18n="nav.about">关于我</a>
+      <a href="#blog" class="nav-link" data-i18n="nav.blog">博客</a>
       <a href="#experience" class="nav-link" data-i18n="nav.experience">工作经历</a>
       <a href="#projects" class="nav-link" data-i18n="nav.projects">项目经历</a>
       <a href="#skills" class="nav-link" data-i18n="nav.skills">技能栈</a>
@@ -27,6 +43,7 @@
       <a href="#contact" class="nav-link" data-i18n="nav.contact">联系我</a>
     </nav>
     <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">EN</button>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题">🌙</button>
     <a class="nav-gh" href="https://github.com/amengnew" target="_blank" rel="noopener" aria-label="GitHub">
       <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2A10 10 0 0 0 9.1 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>
     </a>
@@ -35,41 +52,29 @@
     </button>
   </header>
 
-  <!-- ===================== HERO ===================== -->
-  <section class="hero band" id="hero">
-    <div class="hero-leaves" aria-hidden="true">
-      <span class="hero-leaf">🍃</span>
-      <span class="hero-leaf">🌿</span>
-      <span class="hero-leaf">🍃</span>
-      <span class="hero-leaf">🌱</span>
+  <main id="main-content"><!-- ===================== HERO ===================== -->
+  <section class="hero-scroll" id="hero">
+    <div class="hero-visual" aria-hidden="true">
+      <canvas class="hero-canvas" id="heroCanvas"></canvas>
+      <div class="hero-overlay"></div>
+      <div class="hero-grass-edge"></div>
+      <div class="hero-leaf hero-leaf-1">🍃</div>
+      <div class="hero-leaf hero-leaf-2">🌿</div>
+      <button class="hero-cat" id="heroCat" type="button" aria-label="点我喵一声">😺</button>
     </div>
-    <div class="hero-inner container">
-      <div class="hero-mascot" aria-hidden="false">
-        <div class="hero-avatar">
-          <span class="hero-cat-emoji" role="img" aria-label="猫咪吉祥物，点击会喵一声">😺</span>
-        </div>
+    <div class="hero-content">
+      <div class="hero-glass">
+        <h1 class="hero-headline">
+          <span class="hero-line" data-i18n="hero.line1">你好，我是</span>
+          <span class="hero-name">Zhihao Meng</span>
+        </h1>
+        <p class="hero-tagline" data-i18n="hero.tagline">LLM Agent 工程师</p>
       </div>
-      <div class="hero-copy">
-        <div class="speech">
-          <span class="speech-text" data-i18n="hero.speech">喵～欢迎光临 Zhihao 的个人空间！</span>
-        </div>
-        <h1 class="hero-title" data-i18n-html="hero.title">你好，我是 <span class="hl">Zhihao Meng</span> 👋</h1>
-        <p class="hero-sub" data-i18n-html="hero.sub">开发工程师，专注 LLM Agent 平台、RAG 与多智能体工程化。<br />白天写 Agent，夜里陪猫咪 Debug。</p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">
-            <span data-i18n="hero.ctaPrimary">看看我的项目</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a href="#contact" class="btn btn-ghost" data-i18n="hero.ctaGhost">联系我</a>
-        </div>
-        <dl class="hero-stats">
-          <div class="stat"><dt data-i18n="hero.stat1.label">工作经验</dt><dd><b>1+</b> <span data-i18n="hero.stat1.unit">年</span></dd></div>
-          <div class="stat"><dt data-i18n="hero.stat2.label">AI 项目</dt><dd><b>4+</b></dd></div>
-          <div class="stat"><dt data-i18n="hero.stat3.label">学历</dt><dd><b data-i18n="hero.stat3.value">硕士</b></dd></div>
-        </dl>
-      </div>
+      <a class="hero-scroll-hint" href="#about" aria-label="向下滚动查看更多">
+        <span data-i18n="hero.scrollHint">向下滚动</span>
+        <span class="hero-scroll-arrow">↓</span>
+      </a>
     </div>
-    <div class="hero-divider" aria-hidden="true"></div>
   </section>
 
   <!-- ===================== 关于我 ===================== -->
@@ -85,13 +90,35 @@
             <li data-i18n="about.tag1">🐱 开发工程师</li>
             <li data-i18n="about.tag2">🚀 LLM Agent 平台</li>
             <li data-i18n="about.tag3">📚 RAG / 多智能体</li>
-            <li data-i18n="about.tag4">🌙 夜猫子</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ===================== 博客 ===================== -->
+  <section class="band" id="blog">
+    <div class="container">
+      <h2 class="section-title center ribbon-blue"><span class="ribbon-emoji">📝</span><span data-i18n="blog.title">博客</span></h2>
+      <p class="section-sub center" data-i18n="blog.sub">记录 AI 工程、工具链与折腾日常。</p>
+      <div class="blog-list">
+        <a class="blog-item" href="blog/agent-orchestration.html">
+          <span class="blog-item-date">2026.10</span>
+          <span class="blog-item-title" data-i18n="blog.post1">Agent 编排引擎的设计思考</span>
+        </a>
+        <a class="blog-item" href="blog/rag-optimization.html">
+          <span class="blog-item-date">2026.09</span>
+          <span class="blog-item-title" data-i18n="blog.post2">RAG 知识库的端到端优化</span>
+        </a>
+        <a class="blog-item" href="blog/llm-tracing.html">
+          <span class="blog-item-date">2026.08</span>
+          <span class="blog-item-title" data-i18n="blog.post3">LLM 全链路 Trace 实践</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  
   <!-- ===================== 工作经历 ===================== -->
   <section class="band band-alt" id="experience">
     <div class="container">
@@ -123,8 +150,8 @@
     <div class="container">
       <h2 class="section-title center ribbon-blue"><span class="ribbon-emoji">🏝️</span><span data-i18n="proj.title">项目经历</span></h2>
       <p class="section-sub center" data-i18n="proj.sub">这些是我亲手设计、敲过、跑起来的 AI 系统。</p>
-      <div class="project-grid">
-        <article class="project-card">
+      <div class="project-compact-grid">
+        <button class="project-compact" type="button" data-project="trade">
           <div class="project-head">
             <div class="project-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 8-8M16 7h5v5"/></svg>
@@ -134,18 +161,10 @@
               <p class="project-period" data-i18n="proj.trade.period">2026.06 – 至今</p>
             </div>
           </div>
-          <ul class="tag-list">
-            <li>Python</li><li>LangGraph</li><li>LangChain</li><li>Pydantic</li><li>yfinance</li><li>SQLite</li>
-          </ul>
-          <ul class="project-bullets">
-            <li data-i18n="proj.trade.b1">基于 LangGraph 状态图构建「分析师→多空辩论→风控辩论→组合经理」决策流水线，条件边 + 计数器驱动辩论轮转，共享状态实现 Agent 间接通信，消息清理隔离上下文防叙事污染。</li>
-            <li data-i18n="proj.trade.b2">append-only 两阶段决策日志：决策时 pending 入库，下次同标的运行拉取实际收益由 Reflector 反思回填，仅注入组合经理，在有限上下文窗口下沉淀经验。</li>
-            <li data-i18n="proj.trade.b3">多供应商数据路由（yfinance/FRED/Polymarket/AlphaVantage）分级回退 + NO_DATA 哨兵杜绝模型编造；结构化输出在 JSON 损坏时降级自由文本，保证决策链路不阻塞。</li>
-            <li data-i18n="proj.trade.b4">ProviderSpec 注册表适配十余家 OpenAI 兼容供应商，per-ticker SQLite 检查点恢复，角色与数据源解耦为可插拔模块。</li>
-          </ul>
-        </article>
+          <span class="project-expand-hint">查看详情</span>
+        </button>
 
-        <article class="project-card">
+        <button class="project-compact" type="button" data-project="rag">
           <div class="project-head">
             <div class="project-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14 3v5h5M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM9 13h6M9 17h6"/></svg>
@@ -155,18 +174,10 @@
               <p class="project-period" data-i18n="proj.rag.period">2026.01 – 2026.05</p>
             </div>
           </div>
-          <ul class="tag-list">
-            <li>Java</li><li>Spring AI</li><li>PgVector</li><li>Elasticsearch</li><li>Neo4j</li><li>Rerank</li>
-          </ul>
-          <ul class="project-bullets">
-            <li data-i18n="proj.rag.b1">策略+工厂模式 DocumentReaderFactory 路由多格式解析器；自研 PdfMultimodalProcessor 继承 PDFTextStripper 拦截 Do 算子还原图文阅读顺序，qwen3-vl 将图片转语义描述回写 image 标签。</li>
-            <li data-i18n="proj.rag.b2">Markdown 标题层级切分器维护标题栈处理跨层级回退，父子分块经 parentChunkId 关联上下文；双路索引：ES ik 分词 BM25 + PgVector HNSW 稠密向量。</li>
-            <li data-i18n="proj.rag.b3">四类查询改写（分解/富化/多样化/Step-Back）可组合编排，LLM 问题路由按数据源分流；ES+向量双路召回用 RRF 融合 + gte-rerank-v2 精排提升 Top-K 准确率。</li>
-            <li data-i18n="proj.rag.b4">基于 RetrievalAugmentationAdvisor 组装可插拔管线，接入 Neo4j GraphRAG 实体关系检索，支持多数据源协同问答。</li>
-          </ul>
-        </article>
+          <span class="project-expand-hint">查看详情</span>
+        </button>
 
-        <article class="project-card">
+        <button class="project-compact" type="button" data-project="doubao">
           <div class="project-head">
             <div class="project-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="28" height="28"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2zM8 10h.01M12 10h.01M16 10h.01"/></svg>
@@ -176,48 +187,51 @@
               <p class="project-period" data-i18n="proj.doubao.period">2026.02 – 2026.05</p>
             </div>
           </div>
-          <ul class="tag-list">
-            <li>Java</li><li>Spring AI</li><li>Reactor SSE</li><li>MCP</li><li>Redis</li><li>MySQL</li>
-          </ul>
-          <ul class="project-bullets">
-            <li data-i18n="proj.doubao.b1">BaseAgent 基类统一记忆/计时/推荐问题，派生 ReAct、Plan-Execute、State-Machine 多种智能体；ContextCompactor 两层压缩（占位符 + LLM 摘要）控制长对话上下文膨胀。</li>
-            <li data-i18n="proj.doubao.b2">深度研究引擎：Plan-Execute-Critique 多轮循环，order 分层依赖+并行执行，Semaphore 控并发、CountDownLatch 同步批次，批判驱动多轮迭代。</li>
-            <li data-i18n="proj.doubao.b3">状态机+策略模式 PPT 生成引擎（INIT→…→SUCCESS），MySQL 持久化实例状态支持任意阶段断点续传，AI 配图 + Python-pptx/PptxGenJS 双引擎渲染。</li>
-            <li data-i18n="proj.doubao.b4">统一 SSE 协议（thinking/text/reference/recommend），ThinkTagParser 拆分推理与回答；Redis+Redisson 分布式锁任务去重 + Pub/Sub 跨实例停止 + TTL 续期。</li>
-          </ul>
-        </article>
+          <span class="project-expand-hint">查看详情</span>
+        </button>
       </div>
     </div>
   </section>
+
+  <!-- 项目详情弹窗 -->
+  <div class="project-modal" id="projectModal" role="dialog" aria-modal="true" hidden>
+    <div class="project-modal-backdrop" data-close></div>
+    <div class="project-modal-content">
+      <button class="project-modal-close" type="button" aria-label="关闭">×</button>
+      <div class="project-modal-body" id="projectModalBody"></div>
+    </div>
+  </div>
+
+  <div class="meow-bubble" id="meowBubble" aria-live="polite"></div>
 
   <!-- ===================== 技能栈 ===================== -->
   <section class="band band-alt" id="skills">
     <div class="container">
       <h2 class="section-title center ribbon-yellow"><span class="ribbon-emoji">🎒</span><span data-i18n="skill.title">技能栈</span></h2>
-      <p class="section-sub center" data-i18n="skill.sub">逛完项目，看看我背包里都装了哪些 AI 工程工具。</p>
+      <p class="section-sub center" data-i18n="skill.sub">常用的 AI 工程工具。</p>
       <div class="skill-groups">
         <div class="skill-group">
           <h3 class="skill-cat" data-i18n="skill.lang">编程语言</h3>
           <ul class="skill-badges">
-            <li>Java</li><li>Python</li><li>SQL</li><li>Shell</li>
+            <li>Java</li><li>Python</li><li>SQL</li>
           </ul>
         </div>
         <div class="skill-group">
           <h3 class="skill-cat" data-i18n="skill.framework">框架与中间件</h3>
           <ul class="skill-badges">
-            <li>Spring AI</li><li>LangChain / LangGraph</li><li>FastAPI</li><li>Reactor (SSE)</li><li>MyBatis-Plus</li><li>Redis</li><li>Kafka</li><li>Elasticsearch</li><li>PgVector</li><li>Neo4j</li><li>MinIO</li>
+            <li>Spring AI</li><li>LangGraph</li><li>FastAPI</li><li>Redis</li><li>Kafka</li><li>ES</li><li>PgVector</li>
           </ul>
         </div>
         <div class="skill-group">
           <h3 class="skill-cat" data-i18n="skill.llm">LLM / 智能体</h3>
           <ul class="skill-badges">
-            <li>Agent 编排</li><li>RAG / 混合检索</li><li>Function Calling / MCP</li><li>ReAct / Plan-and-Execute</li><li>流式 SSE</li><li>Token 计量计费</li><li>可观测性</li><li>RAGAS 评估</li>
+            <li>Agent 编排</li><li>RAG</li><li>MCP</li><li>ReAct</li><li>SSE</li><li>Token 计费</li><li>可观测</li>
           </ul>
         </div>
         <div class="skill-group">
           <h3 class="skill-cat" data-i18n="skill.tools">工具</h3>
           <ul class="skill-badges">
-            <li>Git</li><li>Docker / Kubernetes</li><li>OpenTelemetry</li><li>Cursor</li><li>Codex</li><li>Unix shell</li>
+            <li>Git</li><li>Docker</li><li>K8s</li><li>OTel</li><li>Cursor</li>
           </ul>
         </div>
       </div>
@@ -265,14 +279,12 @@
             <span class="contact-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4zM4 7l8 6 8-6"/></svg></span>
             <span class="contact-label"><b data-i18n="contact.email">邮箱</b><span>717333759@qq.com</span></span>
           </a>
-          <a class="contact-item" href="tel:+8615942594429">
-            <span class="contact-ic"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
-            <span class="contact-label"><b data-i18n="contact.phone">电话</b><span>+86 15942594429</span></span>
-          </a>
         </div>
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- 页脚 -->
   <footer class="footer">
@@ -287,6 +299,32 @@
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></svg>
   </button>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Zhihao Meng",
+    "givenName": "Zhihao",
+    "familyName": "Meng",
+    "jobTitle": "软件开发工程师",
+    "url": "https://amengnew.github.io/person_website/",
+    "sameAs": ["https://github.com/amengnew"],
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "University of Bristol" },
+      { "@type": "CollegeOrUniversity", "name": "中南大学" }
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "北京比特大陆科技有限公司"
+    },
+    "knowsAbout": ["LLM Agent 平台", "RAG", "多智能体系统", "Token 计费", "可观测性"],
+    "email": "717333759@qq.com",
+    "telephone": "+8615942594429"
+  }
+  </script>
 </body>
 </html>

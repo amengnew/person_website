@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAG 知识库的端到端优化 · Zhihao Meng</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="nav"><a href="../index.html" class="nav-brand">← 返回首页</a></header>
+  <article class="post-page container">
+    <time class="post-date">2026 年 9 月</time>
+    <h1>RAG 知识库的端到端优化</h1>
+    <p>密集/稀疏混合检索、Rerank 精排、查询改写与 HyDE，多维度提升召回质量。</p>
+    <h2>问题定位</h2>
+    <p>传统向量检索在专业术语和长尾查询上召回率只有 72%，主要原因是 dense embedding 对关键词不敏感，而用户实际查询中有 40% 包含精确术语。</p>
+    <h2>混合检索方案</h2>
+    <p>使用 bge-m3 同时生成 dense 和 sparse 向量，Milvus 中分别建索引后融合召回，再用 bge-reranker 精排。召回率从 72% 提升至 91%，首字延迟控制在 800ms。</p>
+    <h2>查询增强</h2>
+    <p>对用户查询做改写和 HyDE（假设性文档嵌入），命中率再提升 18%。用 RAGAS 框架加 500 条标注集做量化评估，确保每次改动都有数据支撑。</p>
+  </article>
+</body>
+</html>

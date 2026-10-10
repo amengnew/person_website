@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLM 全链路 Trace 实践 · Zhihao Meng</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="nav"><a href="../index.html" class="nav-brand">← 返回首页</a></header>
+  <article class="post-page container">
+    <time class="post-date">2026 年 8 月</time>
+    <h1>LLM 全链路 Trace 实践</h1>
+    <p>用 OpenTelemetry 构建大模型应用的观测体系，从指标、日志到分布式追踪。</p>
+    <h2>为什么传统 APM 不够用</h2>
+    <p>大模型应用的调用链有一个特殊问题：每次请求的 Prompt 和输出都不一样，只看延迟和错误率无法定位「为什么这条回答质量差」。</p>
+    <h2>Trace 设计</h2>
+    <p>基于 OpenTelemetry 自定义 Span，把 Prompt 版本、Token 数、模型名、检索命中的文档列表都挂到 trace 上，再通过 Grafana 做可视化看板。</p>
+    <h2>效果</h2>
+    <p>上线后 MTTR 下降 60%，内容安全双通道（敏感词+模型审核）实现注入拦截 99% 以上、误拦低于 2%，可用性 SLO 达到 99.9%。</p>
+  </article>
+</body>
+</html>

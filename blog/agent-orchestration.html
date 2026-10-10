@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent 编排引擎的设计思考 · Zhihao Meng</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header class="nav"><a href="../index.html" class="nav-brand">← 返回首页</a></header>
+  <article class="post-page container">
+    <time class="post-date">2026 年 10 月</time>
+    <h1>Agent 编排引擎的设计思考</h1>
+    <p>从 DAG 工作流到状态机可视化编排，聊聊多租户 Agent 平台的核心引擎架构。</p>
+    <h2>为什么需要编排引擎</h2>
+    <p>当 Agent 数量超过三个，Prompt 链就会变成意大利面。编排引擎的核心职责是把「谁调用谁、什么条件调用、失败后怎么办」这三个问题从代码中抽离出来，变成可视化、可调试的图结构。</p>
+    <h2>架构选型</h2>
+    <p>我们基于 LangGraph 构建 DAG 工作流，支持分支、循环、并行和人工审批四种节点类型。选择 LangGraph 而不是自研，是因为它的状态管理模型天然适合多轮对话场景，且社区活跃、文档完善。</p>
+    <h2>实际效果</h2>
+    <p>上线后 Function Calling 成功率达到 98%，ReAct + Plan-and-Execute 混合推理的完成率从 55% 提升到 76%，分层记忆按需召回让单会话 Token 消耗下降 35%。</p>
+  </article>
+</body>
+</html>
