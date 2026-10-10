@@ -303,7 +303,6 @@
 
     if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
       gsap.registerPlugin(ScrollTrigger);
-
       // Section titles: fade + blur + slide
       $$(".section-title, .section-sub").forEach(el => {
         gsap.from(el, {
@@ -312,7 +311,6 @@
           scrollTrigger: { trigger: el, start: "top 88%", once: true }
         });
       });
-
       // Cards: batch reveal with stagger
       ScrollTrigger.batch(
         ".about-card, .exp-card, .project-compact, .skill-group, .edu-card, .contact-card, .stat",
@@ -325,7 +323,6 @@
           })
         }
       );
-
       // Blog list: stagger from left
       $$(".blog-item").forEach((el, i) => {
         gsap.from(el, {
@@ -334,6 +331,11 @@
           scrollTrigger: { trigger: el, start: "top 92%", once: true }
         });
       });
+    }
+    // Fallback: if GSAP fails to load, just show everything
+    else {
+      $$(".section-title, .section-sub, .about-card, .exp-card, .project-compact, .skill-group, .edu-card, .contact-card, .blog-item, .stat")
+        .forEach(el => { el.style.opacity = "1"; el.style.transform = "none"; });
     }
   }
 
