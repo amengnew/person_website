@@ -1,0 +1,7 @@
+# robots.txt · https://amengnew.github.io/person_website/
+# 全站允许抓取；sitemap 使用绝对 URL（GitHub Pages 子路径部署）
+
+User-agent: *
+Allow: /
+
+Sitemap: https://amengnew.github.io/person_website/sitemap.xml

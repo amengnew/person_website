@@ -3,21 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // 主题初始化：在样式生效前把 localStorage 里的 site-theme 写到 html[data-theme]，避免深色模式闪白
+    (() => {
+      try {
+        const stored = localStorage.getItem("site-theme");
+        const dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      } catch (_) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
   <title>RAG 知识库的端到端优化 · Zhihao Meng</title>
+  <meta name="description" content="RAG 知识库的端到端优化实践：bge-m3 密集/稀疏混合检索、Rerank 精排、查询改写与 HyDE，召回率 72%→91%、首字&lt;800ms，并用 RAGAS 量化评估。" />
+  <meta name="keywords" content="RAG,混合检索,Rerank,HyDE,RAGAS,bge-m3" />
+  <meta name="author" content="Zhihao Meng" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://amengnew.github.io/person_website/blog/rag-optimization.html" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../favicon.svg" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Zhihao Meng" />
+  <meta property="og:title" content="RAG 知识库的端到端优化 · Zhihao Meng" />
+  <meta property="og:description" content="RAG 知识库的端到端优化实践：bge-m3 密集/稀疏混合检索、Rerank 精排、查询改写与 HyDE，召回率 72%→91%、首字&lt;800ms，并用 RAGAS 量化评估。" />
+  <meta property="og:url" content="https://amengnew.github.io/person_website/blog/rag-optimization.html" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://amengnew.github.io/person_website/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="RAG 知识库的端到端优化 · Zhihao Meng" />
+  <meta property="article:author" content="Zhihao Meng" />
+  <meta property="article:published_time" content="2026-09-12" />
+  <meta property="article:section" content="AI 工程" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="RAG 知识库的端到端优化 · Zhihao Meng" />
+  <meta name="twitter:description" content="混合检索 + Rerank + 查询改写：召回率 72%→91%、首字&lt;800ms 的 RAG 优化实践。" />
+  <meta name="twitter:image" content="https://amengnew.github.io/person_website/assets/og-image.png" />
+  <link rel="prev" href="llm-tracing.html" />
+  <link rel="next" href="agent-orchestration.html" />
   <link rel="stylesheet" href="../styles.css" />
+  <style>
+    /* 文章页局部样式：作者行与上下篇导航，全部复用站点颜色变量，跟随深浅色主题 */
+    .post-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-bottom: 6px; }
+    .post-meta .post-date { margin: 0; }
+    .post-author { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; }
+    .post-nav { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 48px; padding-top: 20px; border-top: 2px dashed var(--border-light); }
+    .post-nav-item { display: flex; flex-direction: column; gap: 4px; flex: 1 1 240px; padding: 14px 18px; border: 2px solid var(--border-light); border-radius: var(--r-sm); background: var(--bg-content); transition: border-color 0.2s ease, transform 0.2s ease; }
+    .post-nav-item:hover { border-color: var(--primary); transform: translateY(-1px); }
+    .post-nav-next { text-align: right; margin-left: auto; }
+    .post-nav-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 700; }
+    .post-nav-title { font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.4; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "RAG 知识库的端到端优化",
+    "description": "RAG 知识库的端到端优化实践：bge-m3 密集/稀疏混合检索、Rerank 精排、查询改写与 HyDE，召回率 72%→91%、首字<800ms，并用 RAGAS 量化评估。",
+    "url": "https://amengnew.github.io/person_website/blog/rag-optimization.html",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://amengnew.github.io/person_website/blog/rag-optimization.html" },
+    "datePublished": "2026-09-12",
+    "dateModified": "2026-09-12",
+    "inLanguage": "zh-CN",
+    "keywords": ["RAG", "混合检索", "Rerank", "HyDE", "RAGAS"],
+    "author": {
+      "@type": "Person",
+      "name": "Zhihao Meng",
+      "url": "https://amengnew.github.io/person_website/",
+      "sameAs": "https://github.com/amengnew"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Zhihao Meng",
+      "url": "https://amengnew.github.io/person_website/"
+    },
+    "isPartOf": {
+      "@type": "Blog",
+      "name": "Zhihao Meng 的博客",
+      "url": "https://amengnew.github.io/person_website/blog.html"
+    }
+  }
+  </script>
 </head>
 <body>
-  <header class="nav"><a href="../index.html" class="nav-brand">← 返回首页</a></header>
-  <article class="post-page container">
-    <time class="post-date">2026 年 9 月</time>
+  <a href="#main-content" class="skip-link" aria-label="跳到主要内容">跳到主要内容</a>
+  <header class="nav">
+    <a href="../blog.html" class="nav-brand">← 博客列表</a>
+    <nav class="nav-links" aria-label="站点导航">
+      <a class="nav-link" href="../index.html">返回首页</a>
+    </nav>
+  </header>
+  <article class="post-page container" id="main-content">
+    <div class="post-meta">
+      <time class="post-date" datetime="2026-09-12">2026 年 9 月 12 日</time>
+      <span class="post-author">作者：Zhihao Meng</span>
+    </div>
     <h1>RAG 知识库的端到端优化</h1>
     <p>密集/稀疏混合检索、Rerank 精排、查询改写与 HyDE，多维度提升召回质量。</p>
     <h2>问题定位</h2>
     <p>传统向量检索在专业术语和长尾查询上召回率只有 72%，主要原因是 dense embedding 对关键词不敏感，而用户实际查询中有 40% 包含精确术语。</p>
     <h2>混合检索方案</h2>
-    <p>使用 bge-m3 同时生成 dense 和 sparse 向量，Milvus 中分别建索引后融合召回，再用 bge-reranker 精排。召回率从 72% 提升至 91%，首字延迟控制在 800ms。</p>
+    <p>使用 bge-m3 同时生成 dense 和 sparse 向量，Milvus 中分别建索引后融合召回，再用 bge-reranker 精排。召回率从 72% 提升至 91%，首字延迟控制在 800ms 以内。</p>
     <h2>查询增强</h2>
     <p>对用户查询做改写和 HyDE（假设性文档嵌入），命中率再提升 18%。用 RAGAS 框架加 500 条标注集做量化评估，确保每次改动都有数据支撑。</p>
+
+    <nav class="post-nav" aria-label="文章导航">
+      <a class="post-nav-item post-nav-prev" href="llm-tracing.html" rel="prev">
+        <span class="post-nav-label">← 上一篇</span>
+        <span class="post-nav-title">LLM 全链路 Trace 实践</span>
+      </a>
+      <a class="post-nav-item post-nav-next" href="agent-orchestration.html" rel="next">
+        <span class="post-nav-label">下一篇 →</span>
+        <span class="post-nav-title">Agent 编排引擎的设计思考</span>
+      </a>
+    </nav>
   </article>
 </body>
 </html>

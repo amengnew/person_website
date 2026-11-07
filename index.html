@@ -9,19 +9,43 @@
   <meta name="author" content="Zhihao Meng" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://amengnew.github.io/person_website/" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <meta name="theme-color" content="#f8f8f0" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1e1b18" media="(prefers-color-scheme: dark)" />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Zhihao Meng · 个人主页" />
   <meta property="og:description" content="开发工程师，专注 LLM Agent 平台、RAG 与多智能体工程化。" />
   <meta property="og:url" content="https://amengnew.github.io/person_website/" />
   <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://amengnew.github.io/person_website/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Zhihao Meng · LLM Agent 工程师" />
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Zhihao Meng · 个人主页" />
   <meta name="twitter:description" content="开发工程师，专注 LLM Agent 平台、RAG 与多智能体工程化。" />
-  <!-- Font preload -->
+  <meta name="twitter:image" content="https://amengnew.github.io/person_website/assets/og-image.png" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" /></noscript>
+  <script>
+    // Set the theme before first paint so dark-mode visitors never see a white flash.
+    (function () {
+      try {
+        var saved = localStorage.getItem("site-theme");
+        if (saved === "dark" || saved === "light") {
+          document.documentElement.setAttribute("data-theme", saved);
+        } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -52,29 +76,51 @@
     </button>
   </header>
 
-  <main id="main-content"><!-- ===================== HERO ===================== -->
-  <section class="hero-scroll" id="hero">
-    <div class="hero-visual" aria-hidden="true">
-      <canvas class="hero-canvas" id="heroCanvas"></canvas>
-      <div class="hero-overlay"></div>
-      <div class="hero-grass-edge"></div>
-      <div class="hero-leaf hero-leaf-1">🍃</div>
-      <div class="hero-leaf hero-leaf-2">🌿</div>
-      <button class="hero-cat" id="heroCat" type="button" aria-label="点我喵一声">😺</button>
+  <main id="main-content" tabindex="-1"><!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <span class="hero-blob hero-blob-1"></span>
+      <span class="hero-blob hero-blob-2"></span>
     </div>
-    <div class="hero-content">
-      <div class="hero-glass">
-        <h1 class="hero-headline">
-          <span class="hero-line" data-i18n="hero.line1">你好，我是</span>
-          <span class="hero-name">Zhihao Meng</span>
-        </h1>
+
+    <div class="hero-inner container">
+      <div class="hero-copy">
+        <p class="hero-eyebrow" data-i18n="hero.line1">你好，我是</p>
+        <h1 class="hero-name">Zhihao Meng</h1>
         <p class="hero-tagline" data-i18n="hero.tagline">LLM Agent 工程师</p>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-value"><span data-i18n="hero.stat1.value">1.5+</span><span class="hero-stat-unit" data-i18n="hero.stat1.unit">年</span></span>
+            <span class="hero-stat-label" data-i18n="hero.stat1.label">工作经验</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value"><span data-i18n="hero.stat2.value">3</span><span class="hero-stat-unit">+</span></span>
+            <span class="hero-stat-label" data-i18n="hero.stat2.label">AI 项目</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value" data-i18n="hero.stat3.value">硕士</span>
+            <span class="hero-stat-label" data-i18n="hero.stat3.label">学历</span>
+          </div>
+        </div>
+
+        <div class="hero-cta">
+          <a class="hero-btn hero-btn-primary" href="#projects" data-i18n="hero.ctaPrimary">看看我的项目</a>
+          <a class="hero-btn hero-btn-ghost" href="#contact" data-i18n="hero.ctaGhost">联系我</a>
+        </div>
       </div>
-      <a class="hero-scroll-hint" href="#about" aria-label="向下滚动查看更多">
-        <span data-i18n="hero.scrollHint">向下滚动</span>
-        <span class="hero-scroll-arrow">↓</span>
-      </a>
+
+      <div class="hero-stage">
+        <div class="cat3d" id="cat3d"></div>
+        <div class="cat3d-fallback" aria-hidden="true">🐱</div>
+        <p class="cat3d-hint" data-i18n="hero.catHint">拖拽旋转 · 点我喵一下</p>
+      </div>
     </div>
+
+    <a class="hero-scroll-hint" href="#about" aria-label="向下滚动查看更多">
+      <span data-i18n="hero.scrollHint">向下滚动</span>
+      <span class="hero-scroll-arrow" aria-hidden="true">↓</span>
+    </a>
   </section>
 
   <!-- ===================== 关于我 ===================== -->
@@ -115,6 +161,7 @@
           <span class="blog-item-title" data-i18n="blog.post3">LLM 全链路 Trace 实践</span>
         </a>
       </div>
+      <p class="blog-more"><a class="blog-more-link" href="blog.html" data-i18n="blog.more">查看全部文章 →</a></p>
     </div>
   </section>
 
@@ -299,6 +346,8 @@
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></svg>
   </button>
 
+  <script src="assets/js/three.min.js" defer></script>
+  <script src="assets/js/cat3d.js" defer></script>
   <script src="assets/js/gsap.min.js"></script>
   <script src="assets/js/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
@@ -323,7 +372,7 @@
     },
     "knowsAbout": ["LLM Agent 平台", "RAG", "多智能体系统", "Token 计费", "可观测性"],
     "email": "717333759@qq.com",
-    "telephone": "+8615942594429"
+    "image": "https://amengnew.github.io/person_website/assets/og-image.png"
   }
   </script>
 </body>

@@ -15,14 +15,20 @@
   let currentLang  = "zh";
 
   /* ==================== i18n ==================== */
+  const i18nCache = new Map();
   async function fetchI18N(lang) {
+    if (i18nCache.has(lang)) return i18nCache.get(lang);
     try {
       const resp = await fetch(`i18n/${lang}.json`);
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      return await resp.json();
+      const dict = await resp.json();
+      i18nCache.set(lang, dict);
+      return dict;
     } catch (e) {
       console.warn(`i18n load failed for "${lang}", fallback zh`, e);
-      return await (await fetch("i18n/zh.json")).json();
+      const fb = await (await fetch("i18n/zh.json")).json();
+      i18nCache.set("zh", fb);
+      return fb;
     }
   }
 
@@ -79,6 +85,21 @@
     if (themeToggle) themeToggle.addEventListener("click", toggleTheme);
   })();
 
+  /* ==================== Skip Link ==================== */
+  const mainContent = document.getElementById("main-content");
+  const skipLink = $(".skip-link");
+  // index.html already ships tabindex="-1" on <main>; this is only a fallback so the in-page
+  // link can actually move keyboard focus, not merely scroll.
+  if (mainContent && !mainContent.hasAttribute("tabindex")) mainContent.setAttribute("tabindex", "-1");
+  if (skipLink && mainContent) {
+    skipLink.addEventListener("click", () => {
+      // Keep the native #main-content jump (URL hash + scroll), then move focus there so the
+      // next Tab starts inside the content instead of falling back to the header.
+      try { mainContent.focus({ preventScroll: true }); }
+      catch (_) { mainContent.focus(); }
+    });
+  }
+
   /* ==================== Project Modal ==================== */
   const projectData = {
     trade: {
@@ -118,129 +139,92 @@
 
   const projectModal = document.getElementById("projectModal");
   const projectModalBody = document.getElementById("projectModalBody");
+  const projectModalContent = projectModal ? projectModal.querySelector(".project-modal-content") : null;
+  const projectModalTitleId = "projectModalTitle";
 
-  function openProjectModal(key) {
+  // The dialog markup lives *inside* <main>, so <main> itself cannot be inerted — instead every
+  // body-level sibling (header, footer, skip-link, to-top, …) and every non-modal child of <main>
+  // is made inert while the dialog is open. `inert` removes both focus and AT access; browsers
+  // without it fall back to aria-hidden.
+  const FOCUSABLE_SEL = "a[href], area[href], button:not([disabled]), input:not([disabled]):not([type='hidden']), select:not([disabled]), textarea:not([disabled]), iframe, [tabindex]:not([tabindex='-1']), [contenteditable='true']";
+  const NON_RENDERED_TAGS = { SCRIPT: 1, STYLE: 1, LINK: 1, META: 1, TEMPLATE: 1, NOSCRIPT: 1 };
+  const supportsInert = typeof HTMLElement !== "undefined" && "inert" in HTMLElement.prototype;
+  let modalBackground = [];   // [{ el, hadInert, ariaHidden }] — restored on close
+  let modalTrigger = null;    // element that opened the dialog; focus goes back to it
+
+  function focusableIn(root) {
+    if (!root) return [];
+    return $$(FOCUSABLE_SEL, root).filter(el => !el.hasAttribute("disabled") && el.getClientRects().length > 0);
+  }
+
+  function hideModalBackground() {
+    modalBackground = [];
+    if (!projectModal) return;
+    const els = [];
+    let node = projectModal;
+    while (node && node !== document.body && node.parentElement) {
+      const parent = node.parentElement;
+      Array.prototype.forEach.call(parent.children, el => {
+        if (el === node || el.contains(projectModal) || NON_RENDERED_TAGS[el.tagName]) return;
+        els.push(el);
+      });
+      node = parent;
+    }
+    els.forEach(el => {
+      modalBackground.push({
+        el: el,
+        hadInert: el.hasAttribute("inert"),
+        ariaHidden: el.getAttribute("aria-hidden")
+      });
+      if (supportsInert) el.setAttribute("inert", "");
+      else el.setAttribute("aria-hidden", "true");
+    });
+  }
+
+  function restoreModalBackground() {
+    modalBackground.forEach(rec => {
+      if (!rec.hadInert) rec.el.removeAttribute("inert");
+      if (rec.ariaHidden === null) rec.el.removeAttribute("aria-hidden");
+      else rec.el.setAttribute("aria-hidden", rec.ariaHidden);
+    });
+    modalBackground = [];
+  }
+
+  function openProjectModal(key, trigger) {
     const data = projectData[key];
     if (!data || !projectModal || !projectModalBody) return;
+    modalTrigger = trigger || document.activeElement;
     projectModalBody.innerHTML = `
-      <h3>${data.name}</h3>
+      <h3 id="${projectModalTitleId}">${data.name}</h3>
       <span class="modal-period">${data.period}</span>
       <ul class="tag-list">${data.tags.map(t => `<li>${t}</li>`).join("")}</ul>
       <ul class="project-bullets">${data.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
     `;
+    projectModal.setAttribute("role", "dialog");
+    projectModal.setAttribute("aria-modal", "true");
+    projectModal.setAttribute("aria-labelledby", projectModalTitleId);
     projectModal.hidden = false;
+    document.body.classList.add("modal-open");
     document.body.style.overflow = "hidden";
+    hideModalBackground();
+    // Park focus on the panel itself (title gets announced first); Tab then reaches the close
+    // button and any links inside the body copy.
+    const focusTarget = projectModalContent || projectModal;
+    if (!focusTarget.hasAttribute("tabindex")) focusTarget.setAttribute("tabindex", "-1");
+    focusTarget.focus({ preventScroll: true });
   }
 
-  /* ==================== Infinite Canvas Ocean ==================== */
-  const canvas = document.getElementById("heroCanvas");
-  if (canvas) {
-    const ctx = canvas.getContext("2d");
-    let width = 0, height = 0;
-
-    function resize() {
-      const rect = canvas.parentElement.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
-      canvas.width = width * window.devicePixelRatio;
-      canvas.height = height * window.devicePixelRatio;
-      canvas.style.width = width + "px";
-      canvas.style.height = height + "px";
-      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
-    }
-    window.addEventListener("resize", resize);
-    resize();
-
-    const isDark = () => document.documentElement.getAttribute("data-theme") === "dark";
-
-    const waveLayers = [
-      { amp: 14, len: 0.012, speed: 0.4, yOff: 0.42, color: [140, 200, 190], alpha: 0.35 },
-      { amp: 18, len: 0.010, speed: 0.6, yOff: 0.50, color: [100, 180, 170], alpha: 0.50 },
-      { amp: 22, len: 0.008, speed: 0.8, yOff: 0.58, color: [70, 160, 155],  alpha: 0.65 },
-      { amp: 16, len: 0.014, speed: 0.5, yOff: 0.68, color: [50, 140, 140],  alpha: 0.80 },
-      { amp: 12, len: 0.016, speed: 0.7, yOff: 0.78, color: [35, 120, 125],  alpha: 0.90 },
-      { amp: 10, len: 0.011, speed: 0.9, yOff: 0.88, color: [25, 100, 110],  alpha: 1.00 },
-    ];
-
-    function drawWaves(time) {
-      const t = time * 0.001;
-      waveLayers.forEach(w => {
-        ctx.beginPath();
-        ctx.moveTo(0, height);
-        for (let x = 0; x <= width; x += 3) {
-          const y = height * w.yOff
-            + Math.sin(x * w.len + t * w.speed * 2) * w.amp
-            + Math.sin(x * w.len * 0.5 + t * w.speed * 1.3) * w.amp * 0.5;
-          ctx.lineTo(x, y);
-        }
-        ctx.lineTo(width, height);
-        ctx.closePath();
-
-        const dark = isDark();
-        const r = dark ? Math.round(w.color[0] * 0.3) : w.color[0];
-        const g = dark ? Math.round(w.color[1] * 0.35) : w.color[1];
-        const b = dark ? Math.round(w.color[2] * 0.4) : w.color[2];
-        ctx.fillStyle = `rgba(${r},${g},${b},${w.alpha})`;
-        ctx.fill();
-
-        // Foam line on top of each wave
-        ctx.strokeStyle = dark ? `rgba(180,220,210,${w.alpha * 0.25})` : `rgba(255,255,255,${w.alpha * 0.35})`;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      });
-    }
-
-    function drawSky() {
-      const dark = isDark();
-      const grad = ctx.createLinearGradient(0, 0, 0, height);
-      if (dark) {
-        grad.addColorStop(0, "#0a1a12");
-        grad.addColorStop(0.4, "#123020");
-        grad.addColorStop(0.7, "#1a4030");
-        grad.addColorStop(1, "#245040");
-      } else {
-        grad.addColorStop(0, "#87ceeb");
-        grad.addColorStop(0.35, "#a8d8c8");
-        grad.addColorStop(0.65, "#c8e8d0");
-        grad.addColorStop(1, "#e8f4d8");
-      }
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, width, height);
-
-      // Sun glow
-      const cx = width * 0.75, cy = height * 0.2;
-      const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 180);
-      if (dark) {
-        glow.addColorStop(0, "rgba(255,250,220,0.4)");
-        glow.addColorStop(0.3, "rgba(200,220,180,0.15)");
-      } else {
-        glow.addColorStop(0, "rgba(255,245,200,0.7)");
-        glow.addColorStop(0.3, "rgba(255,230,180,0.3)");
-      }
-      glow.addColorStop(1, "transparent");
-      ctx.fillStyle = glow;
-      ctx.fillRect(0, 0, width, height);
-    }
-
-    function animate(time) {
-      drawSky();
-      drawWaves(time);
-      requestAnimationFrame(animate);
-    }
-    requestAnimationFrame(animate);
-  }
-
-  /* ==================== Cat Meow ==================== */
-  const heroCat = document.getElementById("heroCat");
+  /* ==================== Cat Meow (driven by the 3D hero) ==================== */
   const meowBubble = document.getElementById("meowBubble");
-  if (heroCat && meowBubble) {
+  const catStage = document.getElementById("cat3d");
+  if (meowBubble) {
     const meows = ["喵～", "喵呜！", "呼噜噜…", "喵 =^ｪ^=)", "Meow~", "Purr..."];
     let meowTimer;
-    heroCat.addEventListener("click", () => {
+    window.addEventListener("catmeow", () => {
+      const rect = (catStage || document.body).getBoundingClientRect();
       meowBubble.textContent = meows[Math.floor(Math.random() * meows.length)];
-      const rect = heroCat.getBoundingClientRect();
-      meowBubble.style.left = (rect.left + rect.width / 2) + "px";
-      meowBubble.style.top = (rect.top - 52) + "px";
+      meowBubble.style.left = Math.min(window.innerWidth - 48, Math.max(48, rect.left + rect.width / 2)) + "px";
+      meowBubble.style.top = Math.max(88, rect.top + rect.height * 0.16) + "px";
       meowBubble.classList.add("show");
       clearTimeout(meowTimer);
       meowTimer = setTimeout(() => meowBubble.classList.remove("show"), 1400);
@@ -249,44 +233,141 @@
 
 
   function closeProjectModal() {
-    if (!projectModal) return;
+    if (!projectModal || projectModal.hidden) return;
     projectModal.hidden = true;
+    document.body.classList.remove("modal-open");
     document.body.style.overflow = "";
+    restoreModalBackground();
+    const back = modalTrigger;
+    modalTrigger = null;
+    // Focus must return to the element that opened the dialog, otherwise keyboard/SR users
+    // are dropped back at the top of the document.
+    if (back && typeof back.focus === "function" && document.contains(back)) {
+      try { back.focus({ preventScroll: true }); }
+      catch (_) { back.focus(); }
+    }
+  }
+
+  function trapModalFocus(e) {
+    if (!projectModal || projectModal.hidden) return;
+    const focusables = focusableIn(projectModal);
+    const active = document.activeElement;
+    if (!focusables.length) {
+      e.preventDefault();
+      (projectModalContent || projectModal).focus();
+      return;
+    }
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    const atEdge = active === projectModalContent || !projectModal.contains(active);
+    if (e.shiftKey) {
+      if (atEdge || active === first) { e.preventDefault(); last.focus(); }
+    } else if (atEdge || active === last) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 
   document.querySelectorAll(".project-compact").forEach(btn => {
-    btn.addEventListener("click", () => openProjectModal(btn.dataset.project));
+    btn.addEventListener("click", () => openProjectModal(btn.dataset.project, btn));
   });
   if (projectModal) {
-    projectModal.querySelector("[data-close]")?.addEventListener("click", closeProjectModal);
-    projectModal.querySelector(".project-modal-close")?.addEventListener("click", closeProjectModal);
+    projectModal.querySelectorAll("[data-close]").forEach(el => el.addEventListener("click", closeProjectModal));
+    projectModal.querySelectorAll(".project-modal-close").forEach(el => el.addEventListener("click", closeProjectModal));
+
+    // Single handler: Esc closes the dialog, Tab/Shift+Tab cycle inside it.
     document.addEventListener("keydown", e => {
-      if (e.key === "Escape" && !projectModal.hidden) closeProjectModal();
+      if (projectModal.hidden) return;
+      if (e.key === "Escape" || e.key === "Esc") {
+        e.preventDefault();
+        closeProjectModal();
+      } else if (e.key === "Tab") {
+        trapModalFocus(e);
+      }
+    });
+
+    // Safety net: if focus somehow lands outside the open dialog (mouse click in a browser
+    // without inert), pull it back inside instead of leaving it in the hidden background.
+    document.addEventListener("focusin", e => {
+      if (!projectModal.hidden && !projectModal.contains(e.target)) {
+        const focusables = focusableIn(projectModal);
+        (focusables[0] || projectModalContent || projectModal).focus();
+      }
     });
   }
 
   /* ==================== Scroll Nav + To-Top ==================== */
   const onScrollNav = () => {
-    nav.classList.toggle("scrolled", window.scrollY > 12);
-    toTop.classList.toggle("show", window.scrollY > 480);
+    if (nav) nav.classList.toggle("scrolled", window.scrollY > 12);
+    if (toTop) toTop.classList.toggle("show", window.scrollY > 480);
   };
   window.addEventListener("scroll", onScrollNav, { passive: true });
   onScrollNav();
 
   /* ==================== Mobile Menu ==================== */
-  const closeMenu = () => {
-    navToggle.classList.remove("open");
-    navLinks.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
+  // Wire the toggle to the panel it controls, so AT announces the relationship.
+  if (navToggle && navLinks) navToggle.setAttribute("aria-controls", "navLinks");
+
+  const menuIsOpen = () => !!(navToggle && navLinks && navLinks.classList.contains("open"));
+
+  // The panel fades in through a CSS `visibility` transition, so its links are not focusable
+  // during the first frame after opening. Retry across a few frames so focus really lands in
+  // the menu — but stop if the user has already moved focus somewhere else.
+  const nextFrame = typeof requestAnimationFrame === "function"
+    ? cb => requestAnimationFrame(cb)
+    : cb => setTimeout(cb, 16);
+
+  function focusFirstNavLink(attemptsLeft) {
+    if (!menuIsOpen() || !navLinks) return;
+    const firstLink = navLinks.querySelector(".nav-link");
+    if (!firstLink) return;
+    const active = document.activeElement;
+    const stillYours = active === navToggle || active === document.body || navLinks.contains(active);
+    if (!stillYours) return;
+    firstLink.focus();
+    if (document.activeElement === firstLink || attemptsLeft <= 0) return;
+    nextFrame(() => focusFirstNavLink(attemptsLeft - 1));
+  }
+
+  const setMenu = open => {
+    if (!navToggle || !navLinks) return;
+    navLinks.classList.toggle("open", open);
+    navToggle.classList.toggle("open", open);
+    navToggle.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-label", open ? "关闭菜单" : "打开菜单");
   };
-  if (navToggle) {
+
+  const closeMenu = () => setMenu(false);
+
+  if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
-      const open = navLinks.classList.toggle("open");
-      navToggle.classList.toggle("open", open);
-      navToggle.setAttribute("aria-expanded", String(open));
+      const open = !menuIsOpen();
+      setMenu(open);
+      // Opening moves focus into the panel so keyboard/SR users land on the first link.
+      if (open) focusFirstNavLink(30);
     });
   }
   $$(".nav-link").forEach(link => link.addEventListener("click", closeMenu));
+
+  document.addEventListener("keydown", e => {
+    if (!menuIsOpen()) return;
+    if (e.key === "Escape" || e.key === "Esc") {
+      e.preventDefault();
+      closeMenu();
+      // Esc returns focus to the button that opened the panel.
+      if (navToggle) navToggle.focus();
+      return;
+    }
+    if (e.key === "Tab") {
+      // Tab leaving the panel closes it, so no focus is left on now-hidden links.
+      setTimeout(() => {
+        if (!menuIsOpen()) return;
+        const active = document.activeElement;
+        if (active && active !== navToggle && !navLinks.contains(active)) closeMenu();
+      }, 0);
+    }
+  });
+
   if (toTop) toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
   /* ==================== Scroll Spy + Reveal ==================== */
@@ -304,7 +385,12 @@
     }, { rootMargin: "-45% 0px -50% 0px" });
     sections.forEach(s => spy.observe(s));
 
-    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    // GSAP's from() animations are motion effects: honour prefers-reduced-motion by skipping
+    // them and showing the content immediately. The nav highlight below is unaffected.
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const revealTargets = ".section-title, .section-sub, .about-card, .exp-card, .project-compact, .skill-group, .edu-card, .contact-card, .blog-item, .stat";
+
+    if (!prefersReducedMotion && typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
       gsap.registerPlugin(ScrollTrigger);
       // Section titles: fade + blur + slide
       $$(".section-title, .section-sub").forEach(el => {
@@ -334,11 +420,22 @@
           scrollTrigger: { trigger: el, start: "top 92%", once: true }
         });
       });
+      // Fonts / the 3D hero can shift trigger positions after first paint; refresh once the page
+      // has fully loaded so deep-linked anchors still reveal their section.
+      const refreshTriggers = () => {
+        try { ScrollTrigger.refresh(); } catch (_) {}
+      };
+      if (document.readyState === "complete") refreshTriggers();
+      else window.addEventListener("load", refreshTriggers, { once: true });
     }
-    // Fallback: if GSAP fails to load, just show everything
+    // Fallback: GSAP missing, or reduced motion → show everything instead of leaving it at
+    // opacity: 0 (nav highlight still comes from the IntersectionObserver spy above).
     else {
-      $$(".section-title, .section-sub, .about-card, .exp-card, .project-compact, .skill-group, .edu-card, .contact-card, .blog-item, .stat")
-        .forEach(el => { el.style.opacity = "1"; el.style.transform = "none"; });
+      $$(revealTargets).forEach(el => {
+        el.style.opacity = "1";
+        el.style.transform = "none";
+        el.style.filter = "none";
+      });
     }
   }
 
@@ -385,10 +482,12 @@
     setTimeout(() => p.remove(), dur * 1000 + 500);
   }
 
-  // Spawn particles periodically (but not too many)
-  setInterval(spawnParticle, 1500);
-  // Initial batch
-  for (let i = 0; i < 5; i++) setTimeout(spawnParticle, i * 800);
+  // Spawn particles periodically (but not too many, and not at all for reduced motion)
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (!prefersReduced.matches) {
+    setInterval(spawnParticle, 1500);
+    for (let i = 0; i < 5; i++) setTimeout(spawnParticle, i * 800);
+  }
 
   /* ==================== Parallax on Hero Mascot ==================== */
   const mascot = document.getElementById("mascot");

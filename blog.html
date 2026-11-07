@@ -3,28 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // 主题初始化：在样式生效前把 localStorage 里的 site-theme 写到 html[data-theme]，避免深色模式闪白
+    (() => {
+      try {
+        const stored = localStorage.getItem("site-theme");
+        const dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      } catch (_) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
   <title>博客 · Zhihao Meng</title>
-  <meta name="description" content="Zhihao Meng 的博客，记录 LLM Agent、RAG 与可观测性工程实践。" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🐱%3C/text%3E%3C/svg%3E" />
+  <meta name="description" content="Zhihao Meng 的博客：LLM Agent 编排、RAG 知识库优化与大模型全链路可观测性的工程实践笔记。" />
+  <meta name="keywords" content="博客,LLM Agent,RAG,可观测性,OpenTelemetry,LangGraph" />
+  <meta name="author" content="Zhihao Meng" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://amengnew.github.io/person_website/blog.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Zhihao Meng" />
+  <meta property="og:title" content="博客 · Zhihao Meng" />
+  <meta property="og:description" content="Zhihao Meng 的博客：LLM Agent 编排、RAG 知识库优化与大模型全链路可观测性的工程实践笔记。" />
+  <meta property="og:url" content="https://amengnew.github.io/person_website/blog.html" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://amengnew.github.io/person_website/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="博客 · Zhihao Meng" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="博客 · Zhihao Meng" />
+  <meta name="twitter:description" content="LLM Agent 编排、RAG 知识库优化与大模型全链路可观测性的工程实践笔记。" />
+  <meta name="twitter:image" content="https://amengnew.github.io/person_website/assets/og-image.png" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* 博客列表页局部样式：一句话简介，沿用站点颜色变量 */
+    .blog-page-intro { color: var(--text-muted); font-weight: 500; margin-top: 6px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "博客 · Zhihao Meng",
+    "description": "Zhihao Meng 的博客：LLM Agent 编排、RAG 知识库优化与大模型全链路可观测性的工程实践笔记。",
+    "url": "https://amengnew.github.io/person_website/blog.html",
+    "inLanguage": "zh-CN",
+    "author": {
+      "@type": "Person",
+      "name": "Zhihao Meng",
+      "url": "https://amengnew.github.io/person_website/",
+      "sameAs": "https://github.com/amengnew"
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Zhihao Meng",
+      "url": "https://amengnew.github.io/person_website/"
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": 3,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Agent 编排引擎的设计思考",
+          "url": "https://amengnew.github.io/person_website/blog/agent-orchestration.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "RAG 知识库的端到端优化",
+          "url": "https://amengnew.github.io/person_website/blog/rag-optimization.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "LLM 全链路 Trace 实践",
+          "url": "https://amengnew.github.io/person_website/blog/llm-tracing.html"
+        }
+      ]
+    }
+  }
+  </script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link" aria-label="跳到主要内容">跳到主要内容</a>
   <header class="nav">
     <a href="index.html" class="nav-brand">← 返回首页</a>
   </header>
-  <main class="blog-page container">
+  <main class="blog-page container" id="main-content">
     <h1>博客</h1>
+    <p class="blog-page-intro">记录 AI 工程、工具链与折腾日常。</p>
     <div class="blog-list">
       <a class="blog-item" href="blog/agent-orchestration.html">
-        <span class="blog-item-date">2026.10</span>
+        <time class="blog-item-date" datetime="2026-10-08">2026.10</time>
         <span class="blog-item-title">Agent 编排引擎的设计思考</span>
       </a>
       <a class="blog-item" href="blog/rag-optimization.html">
-        <span class="blog-item-date">2026.09</span>
+        <time class="blog-item-date" datetime="2026-09-12">2026.09</time>
         <span class="blog-item-title">RAG 知识库的端到端优化</span>
       </a>
       <a class="blog-item" href="blog/llm-tracing.html">
-        <span class="blog-item-date">2026.08</span>
+        <time class="blog-item-date" datetime="2026-08-16">2026.08</time>
         <span class="blog-item-title">LLM 全链路 Trace 实践</span>
       </a>
     </div>

@@ -3,13 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // 主题初始化：在样式生效前把 localStorage 里的 site-theme 写到 html[data-theme]，避免深色模式闪白
+    (() => {
+      try {
+        const stored = localStorage.getItem("site-theme");
+        const dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      } catch (_) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
   <title>LLM 全链路 Trace 实践 · Zhihao Meng</title>
+  <meta name="description" content="用 OpenTelemetry 给 LLM 应用做全链路 trace：自定义 Span 记录 Prompt 版本、Token 数与检索命中，配合看板与 SLO 告警，MTTR 下降 60%。" />
+  <meta name="keywords" content="OpenTelemetry,LLM 可观测,全链路追踪,Grafana,SLO" />
+  <meta name="author" content="Zhihao Meng" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://amengnew.github.io/person_website/blog/llm-tracing.html" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../favicon.svg" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Zhihao Meng" />
+  <meta property="og:title" content="LLM 全链路 Trace 实践 · Zhihao Meng" />
+  <meta property="og:description" content="用 OpenTelemetry 给 LLM 应用做全链路 trace：自定义 Span 记录 Prompt 版本、Token 数与检索命中，配合看板与 SLO 告警，MTTR 下降 60%。" />
+  <meta property="og:url" content="https://amengnew.github.io/person_website/blog/llm-tracing.html" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:image" content="https://amengnew.github.io/person_website/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="LLM 全链路 Trace 实践 · Zhihao Meng" />
+  <meta property="article:author" content="Zhihao Meng" />
+  <meta property="article:published_time" content="2026-08-16" />
+  <meta property="article:section" content="AI 工程" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="LLM 全链路 Trace 实践 · Zhihao Meng" />
+  <meta name="twitter:description" content="传统 APM 为什么不够用，以及基于 OpenTelemetry 的 LLM 全链路 trace 设计。" />
+  <meta name="twitter:image" content="https://amengnew.github.io/person_website/assets/og-image.png" />
+  <link rel="next" href="rag-optimization.html" />
   <link rel="stylesheet" href="../styles.css" />
+  <style>
+    /* 文章页局部样式：作者行与上下篇导航，全部复用站点颜色变量，跟随深浅色主题 */
+    .post-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-bottom: 6px; }
+    .post-meta .post-date { margin: 0; }
+    .post-author { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; }
+    .post-nav { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 48px; padding-top: 20px; border-top: 2px dashed var(--border-light); }
+    .post-nav-item { display: flex; flex-direction: column; gap: 4px; flex: 1 1 240px; padding: 14px 18px; border: 2px solid var(--border-light); border-radius: var(--r-sm); background: var(--bg-content); transition: border-color 0.2s ease, transform 0.2s ease; }
+    .post-nav-item:hover { border-color: var(--primary); transform: translateY(-1px); }
+    .post-nav-next { text-align: right; margin-left: auto; }
+    .post-nav-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 700; }
+    .post-nav-title { font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.4; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "LLM 全链路 Trace 实践",
+    "description": "用 OpenTelemetry 给 LLM 应用做全链路 trace：自定义 Span 记录 Prompt 版本、Token 数与检索命中，配合看板与 SLO 告警，MTTR 下降 60%。",
+    "url": "https://amengnew.github.io/person_website/blog/llm-tracing.html",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://amengnew.github.io/person_website/blog/llm-tracing.html" },
+    "datePublished": "2026-08-16",
+    "dateModified": "2026-08-16",
+    "inLanguage": "zh-CN",
+    "keywords": ["OpenTelemetry", "LLM 可观测", "全链路追踪", "Grafana", "SLO"],
+    "author": {
+      "@type": "Person",
+      "name": "Zhihao Meng",
+      "url": "https://amengnew.github.io/person_website/",
+      "sameAs": "https://github.com/amengnew"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Zhihao Meng",
+      "url": "https://amengnew.github.io/person_website/"
+    },
+    "isPartOf": {
+      "@type": "Blog",
+      "name": "Zhihao Meng 的博客",
+      "url": "https://amengnew.github.io/person_website/blog.html"
+    }
+  }
+  </script>
 </head>
 <body>
-  <header class="nav"><a href="../index.html" class="nav-brand">← 返回首页</a></header>
-  <article class="post-page container">
-    <time class="post-date">2026 年 8 月</time>
+  <a href="#main-content" class="skip-link" aria-label="跳到主要内容">跳到主要内容</a>
+  <header class="nav">
+    <a href="../blog.html" class="nav-brand">← 博客列表</a>
+    <nav class="nav-links" aria-label="站点导航">
+      <a class="nav-link" href="../index.html">返回首页</a>
+    </nav>
+  </header>
+  <article class="post-page container" id="main-content">
+    <div class="post-meta">
+      <time class="post-date" datetime="2026-08-16">2026 年 8 月 16 日</time>
+      <span class="post-author">作者：Zhihao Meng</span>
+    </div>
     <h1>LLM 全链路 Trace 实践</h1>
     <p>用 OpenTelemetry 构建大模型应用的观测体系，从指标、日志到分布式追踪。</p>
     <h2>为什么传统 APM 不够用</h2>
@@ -18,6 +108,13 @@
     <p>基于 OpenTelemetry 自定义 Span，把 Prompt 版本、Token 数、模型名、检索命中的文档列表都挂到 trace 上，再通过 Grafana 做可视化看板。</p>
     <h2>效果</h2>
     <p>上线后 MTTR 下降 60%，内容安全双通道（敏感词+模型审核）实现注入拦截 99% 以上、误拦低于 2%，可用性 SLO 达到 99.9%。</p>
+
+    <nav class="post-nav" aria-label="文章导航">
+      <a class="post-nav-item post-nav-next" href="rag-optimization.html" rel="next">
+        <span class="post-nav-label">下一篇 →</span>
+        <span class="post-nav-title">RAG 知识库的端到端优化</span>
+      </a>
+    </nav>
   </article>
 </body>
 </html>
