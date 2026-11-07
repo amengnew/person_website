@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# 本地生成/临时产物（不参与部署）
+outputs/
+test_gen.png
+
+# 依赖与日志
+node_modules/
+*.log
