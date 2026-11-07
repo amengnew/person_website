@@ -1,4 +1,4 @@
-﻿// Zhihao Meng — Interactive site (i18n + theme + effects)
+// Zhihao Meng — Interactive site (i18n + theme + effects)
 (() => {
   "use strict";
 
@@ -36,8 +36,12 @@
       if (dict[el.dataset.i18n] != null) el.textContent = dict[el.dataset.i18n];
     });
     if (langToggle) langToggle.textContent = lang === "en" ? "中" : "EN";
-    const yearEl = document.getElementById("year");
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+    // Keep <html lang> in sync so screen readers pick the right voice / search engines the right language
+    document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+    // The footer string carries a "YEAR" placeholder; the dict replaces the <span id="year"> node,
+    // so interpolate the real year back after the text swap.
+    const footerEl = document.querySelector(".footer-text");
+    if (footerEl) footerEl.textContent = footerEl.textContent.replace("YEAR", new Date().getFullYear());
     if (navLinks) navLinks.setAttribute("aria-label", lang === "en" ? "Main navigation" : "主导航");
   }
 
@@ -66,13 +70,12 @@
     setTheme(cur === "dark" ? "light" : "dark");
   }
   (() => {
-    let saved = "light";
-    try { saved = localStorage.getItem(THEME_KEY) || "light"; } catch (_) {}
-    // Respect system preference as default
-    if (!localStorage.getItem(THEME_KEY) && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      saved = "dark";
-    }
-    setTheme(saved);
+    // Stored choice wins; otherwise follow the system preference.
+    // Everything reading localStorage is wrapped: privacy modes can throw.
+    let stored = null;
+    try { stored = localStorage.getItem(THEME_KEY); } catch (_) {}
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setTheme(stored || (prefersDark ? "dark" : "light"));
     if (themeToggle) themeToggle.addEventListener("click", toggleTheme);
   })();
 
@@ -385,7 +388,10 @@
   // Spawn particles periodically (but not too many)
   setInterval(spawnParticle, 1500);
   // Initial batch
-  for (let i = 0; i < 5; i++) setTimeout(spawnParticle, i * 800);/* ==================== Parallax on Hero Mascot ==================== */
+  for (let i = 0; i < 5; i++) setTimeout(spawnParticle, i * 800);
+
+  /* ==================== Parallax on Hero Mascot ==================== */
+  const mascot = document.getElementById("mascot");
   if (mascot) {
     window.addEventListener("mousemove", e => {
       const x = (e.clientX / window.innerWidth - 0.5) * 12;
