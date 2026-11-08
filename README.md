@@ -6,12 +6,17 @@
 ## 特性
 
 - 中英双语切换：导航栏右侧的语言按钮一键切换，选择保存在 localStorage
-- 首屏 3D 猫咪：three.js（r128，本地托管在 `assets/js/three.min.js`）+ `assets/js/cat3d.js` 程序化几何生成的黏土风猫头，可拖拽旋转（带惯性）、点击喵一声；WebGL 不可用或 `prefers-reduced-motion` 时自动降级为静态造型
+- 首屏猫咪肖像：CC0 授权的写实猫照片（Wikimedia Commons，已调色融入站点配色），圆角相框 + 指针视差微立体，点击/回车喵一声；`prefers-reduced-motion` 下关闭视差，图片加载失败自动降级为 🐱
 - GSAP / ScrollTrigger 滚动入场动画：依赖全部自托管（`assets/js/`），不依赖 CDN；`prefers-reduced-motion` 下自动跳过动画并直接显示内容
 - 深色 / 浅色主题：写入 localStorage 的 `site-theme`，未设置时跟随系统偏好；各页面在 head 内联脚本里提前应用，避免深色模式闪白
 - 博客：`blog.html` 列表页 + `blog/` 下三篇文章，文末带上一篇 / 下一篇导航
 - SEO：每页 canonical、Open Graph、Twitter Card 与 JSON-LD（首页 Person、列表页 CollectionPage、文章页 BlogPosting），并附 `robots.txt` + `sitemap.xml`
 - 响应式布局：桌面 / 平板 / 手机自适应，无框架、无打包工具
+
+## 图片来源
+
+首屏猫咪照片来自 Wikimedia Commons：**“Tabby cat with blue eyes”**（CC0 / 公有领域，作者见文件页），
+已裁切调色用于首屏；OG 分享图亦使用同一张照片。CC0 不要求署名，此处仅作来源说明。
 
 ## 本地预览
 
@@ -38,8 +43,7 @@ python3 -m http.server 8000
 │   └── en.json                    英文文案（UTF-8 with BOM）
 ├── assets/
 │   ├── js/
-│   │   ├── three.min.js           首屏 3D 猫咪用的 three.js
-│   │   ├── cat3d.js               猫头场景：程序化几何、拖拽旋转、点击喵叫、降级
+│   │   ├── cat-hero.js            首屏猫咪肖像：指针视差、点击喵叫、降级
 │   │   ├── gsap.min.js            滚动入场动画
 │   │   └── ScrollTrigger.min.js   GSAP 滚动触发器
 │   ├── og-image.png               社交分享预览图（1200×630，供 og:image / twitter:image 使用）
@@ -61,7 +65,7 @@ python3 -m http.server 8000
 - 增删文案时，`index.html`、`i18n/zh.json`、`i18n/en.json` 三处要一起改，key 一一对应；
 - 两份 JSON 的 key 顺序保持一致，数字口径也必须与 HTML 兜底一致（例如 48 模型、3000 QPS、完成率 55%→86%、首字 <800ms、60 万 TPM / 120 RPM）；
 - JSON 文件是 `utf-8-sig`（带 BOM）+ 2 空格缩进，编辑时别把 BOM 或缩进弄丢；
-- 首屏的 `hero.stat*` / `hero.cta*` / `hero.catHint` 等 key 被 3D 首屏直接使用，不要删除。
+- 首屏的 `hero.stat*` / `hero.cta*` / `hero.catHint` 等 key 被首屏直接使用，不要删除。
 
 ## 内容维护
 
@@ -92,11 +96,12 @@ https://amengnew.github.io/person_website/
 
 纯原生三件套 + 少量自托管库，无构建工具：
 
-- `index.html`：页面结构、首屏 3D 猫咪舞台、`data-i18n` 双语标注、Person JSON-LD
+- `index.html`：页面结构、首屏猫咪肖像、`data-i18n` 双语标注、Person JSON-LD
 - `blog.html` / `blog/*.html`：博客列表与文章页，各自带主题初始化脚本和结构化数据
 - `styles.css`：设计变量（含深色主题）、响应式布局与动画
 - `script.js`：语言切换、主题切换、导航与滚动高亮、项目弹窗、喵叫气泡、无障碍焦点管理
-- `assets/js/`：three.js、cat3d.js、GSAP 与 ScrollTrigger（全部本地托管，不依赖 CDN）
+- `assets/`：`cat-hero.jpg/.webp`（首屏猫照片）、`og-image.png`、`neko.svg`、`js/cat-hero.js`
+- `assets/js/`：GSAP 与 ScrollTrigger（本地托管，不依赖 CDN）
 
 ## .gitignore
 
