@@ -8,3 +8,6 @@ test_gen.png
 # 依赖与日志
 node_modules/
 *.log
+
+# img2threejs 流水线工作目录
+.img2threejs/

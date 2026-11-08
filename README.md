@@ -6,7 +6,7 @@
 ## 特性
 
 - 中英双语切换：导航栏右侧的语言按钮一键切换，选择保存在 localStorage
-- 首屏猫咪双模式：默认是 CC0 授权的写实猫照片（Wikimedia Commons，已调色融入站点配色），圆角相框 + 指针视差；下方「3D / 照片」开关可切到 three.js 程序化 3D 猫头（可拖拽旋转、带惯性、眨眼/抖耳/喵叫，黑斑+橘斑+蓝眼按照片配色）。3D 不可用或未切换时回退照片，`prefers-reduced-motion` 下关闭动效
+- 首屏猫咪双模式：默认是 CC0 授权的写实猫照片（Wikimedia Commons，已调色融入站点配色），圆角相框 + 指针视差；下方「3D / 照片」开关可切到 three.js 3D 猫头（可拖拽旋转、带惯性、眨眼/抖耳/喵叫）。3D 版由 [img2threejs](https://github.com/img2threejs/img2threejs) 技能流水线重建：按参考图量测头骨/眼距/虹膜/鼻位比例，脸部件采用"投影优先"（去光照片贴到球面贴片），其余为程序化毛发；3D 不可用或未切换时回退照片，`prefers-reduced-motion` 下关闭动效
 - GSAP / ScrollTrigger 滚动入场动画：依赖全部自托管（`assets/js/`），不依赖 CDN；`prefers-reduced-motion` 下自动跳过动画并直接显示内容
 - 深色 / 浅色主题：写入 localStorage 的 `site-theme`，未设置时跟随系统偏好；各页面在 head 内联脚本里提前应用，避免深色模式闪白
 - 博客：`blog.html` 列表页 + `blog/` 下三篇文章，文末带上一篇 / 下一篇导航
@@ -43,7 +43,8 @@ python3 -m http.server 8000
 │   └── en.json                    英文文案（UTF-8 with BOM）
 ├── assets/
 │   ├── js/
-│   │   ├── cat3d.js               首屏 3D 猫头（three.js 场景、拖拽旋转、眨眼/喵叫）
+│   │   ├── cat3d.js               首屏 3D 猫头（measured 比例 + 照片脸贴片 + 程序化毛发）
+│   ├── cat-face.webp              投影用脸部贴图（去边羽化，供 3D 模式使用）
 │   │   ├── three.min.js           three.js r128（3D 模式与 GLTF 备用）
 │   │   ├── gsap.min.js            滚动入场动画
 │   │   └── ScrollTrigger.min.js   GSAP 滚动触发器
