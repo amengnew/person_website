@@ -11,7 +11,7 @@
   "hero.scrollHint": "向下滚动",
   "hero.ctaPrimary": "看看我的项目",
   "hero.ctaGhost": "联系我",
-  "hero.catHint": "移动鼠标 · 点我喵一下",
+  "hero.catHint": "拖拽旋转 · 点我喵一下",
   "hero.stat1.label": "工作经验",
   "hero.stat1.value": "1.5+",
   "hero.stat1.unit": "年",
@@ -102,5 +102,7 @@
   "contact.title": "来打个招呼吧",
   "contact.sub": "neko 很友善，不会挠人的（大概）。",
   "contact.email": "邮箱",
-  "footer.text": "© YEAR Zhihao Meng · 用 ❤️ 与代码搭建"
+  "footer.text": "© YEAR Zhihao Meng · 用 ❤️ 与代码搭建",
+  "hero.view3d": "3D",
+  "hero.viewPhoto": "照片"
 }

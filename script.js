@@ -1,4 +1,4 @@
-// Zhihao Meng — Interactive site (i18n + theme + effects)
+﻿// Zhihao Meng — Interactive site (i18n + theme + effects)
 (() => {
   "use strict";
 
@@ -214,17 +214,63 @@
     focusTarget.focus({ preventScroll: true });
   }
 
+  /* ==================== Hero media switch (3D <-> photo) ==================== */
+  const heroStage = document.querySelector(".hero-stage");
+  const heroView3d = document.getElementById("heroView3d");
+  const heroViewPhoto = document.getElementById("heroViewPhoto");
+  if (heroStage && heroView3d && heroViewPhoto) {
+    const KEY = "hero-media";
+    const applyMode = (mode) => {
+      const photo = mode === "photo";
+      heroStage.classList.toggle("is-photo", photo);
+      heroViewPhoto.classList.toggle("is-active", photo);
+      heroView3d.classList.toggle("is-active", !photo);
+      heroViewPhoto.setAttribute("aria-pressed", String(photo));
+      heroView3d.setAttribute("aria-pressed", String(!photo));
+      if (photo) {
+        // make sure the photo fallback is visible even when WebGL works
+        const fb = heroStage.querySelector(".cat-portrait--fallback");
+        if (fb) fb.classList.add("force-show");
+      } else {
+        const fb = heroStage.querySelector(".cat-portrait--fallback");
+        if (fb) fb.classList.remove("force-show");
+      }
+      try { localStorage.setItem(KEY, photo ? "photo" : "3d"); } catch (_) {}
+    };
+    let saved = "photo";
+    try { saved = localStorage.getItem(KEY) || "photo"; } catch (_) {}
+    applyMode(saved);
+    heroView3d.addEventListener("click", () => applyMode("3d"));
+    heroViewPhoto.addEventListener("click", () => applyMode("photo"));
+  }
+
   /* ==================== Cat Meow (driven by the 3D hero) ==================== */
   const meowBubble = document.getElementById("meowBubble");
-  const catStage = document.getElementById("cat3d");
+  // .hero-stage wraps both the 3D canvas and the photo fallback, so it is the
+  // reliable anchor even when one of them is hidden by the media switch.
+  const catStage = document.querySelector(".hero-stage") || document.getElementById("cat3d");
   if (meowBubble) {
     const meows = ["喵～", "喵呜！", "呼噜噜…", "喵 =^ｪ^=)", "Meow~", "Purr..."];
     let meowTimer;
     window.addEventListener("catmeow", () => {
-      const rect = (catStage || document.body).getBoundingClientRect();
+      const stage = catStage || document.body;
+      const rect = stage.getBoundingClientRect();
       meowBubble.textContent = meows[Math.floor(Math.random() * meows.length)];
-      meowBubble.style.left = Math.min(window.innerWidth - 48, Math.max(48, rect.left + rect.width / 2)) + "px";
-      meowBubble.style.top = Math.max(88, rect.top + rect.height * 0.16) + "px";
+
+      // Desktop: park the bubble just left of the cat, with a tail pointing at it.
+      // Narrow screens: float it above the stage instead.
+      const bw = meowBubble.offsetWidth;
+      const bh = meowBubble.offsetHeight;
+      const beside = window.innerWidth >= 900 && rect.left - bw - 28 > 0;
+      meowBubble.classList.toggle("meow-bubble--side", beside);
+      if (beside) {
+        meowBubble.style.left = Math.round(rect.left - 14 - bw) + "px";
+        meowBubble.style.top = Math.round(Math.max(84, rect.top + rect.height * 0.18)) + "px";
+      } else {
+        const centered = rect.left + rect.width / 2 - bw / 2;
+        meowBubble.style.left = Math.round(Math.min(window.innerWidth - bw - 12, Math.max(12, centered))) + "px";
+        meowBubble.style.top = Math.round(Math.max(84, rect.top - bh - 14)) + "px";
+      }
       meowBubble.classList.add("show");
       clearTimeout(meowTimer);
       meowTimer = setTimeout(() => meowBubble.classList.remove("show"), 1400);

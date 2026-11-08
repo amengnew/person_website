@@ -111,17 +111,21 @@
       </div>
 
       <div class="hero-stage">
-        <!-- CC0 photo (Wikimedia Commons: "Tabby cat with blue eyes"), graded for the site palette -->
-        <figure class="cat-portrait" id="catPortrait" role="img" aria-label="一只蓝眼睛的小猫，移动鼠标会轻微摆动，点击会喵一声">
+        <div class="cat3d" id="cat3d"></div>
+        <!-- CC0 photo used as the graceful fallback when WebGL is unavailable -->
+        <figure class="cat-portrait cat-portrait--fallback" aria-hidden="true">
           <picture>
             <source srcset="assets/cat-hero.webp" type="image/webp" />
-            <img src="assets/cat-hero.jpg" alt="" width="1100" height="1100" loading="eager" decoding="async" />
+            <img src="assets/cat-hero.jpg" alt="" width="1100" height="1100" loading="lazy" decoding="async" />
           </picture>
           <span class="cat-portrait-gloss" aria-hidden="true"></span>
           <span class="cat-portrait-ring" aria-hidden="true"></span>
         </figure>
-        <div class="cat-portrait-fallback" aria-hidden="true">🐱</div>
-        <p class="cat-portrait-hint" data-i18n="hero.catHint">移动鼠标 · 点我喵一下</p>
+        <div class="hero-media-switch" role="group" aria-label="首屏显示方式">
+          <button type="button" class="hero-media-btn is-active" id="heroView3d" aria-pressed="true" data-i18n="hero.view3d">3D</button>
+          <button type="button" class="hero-media-btn" id="heroViewPhoto" aria-pressed="false" data-i18n="hero.viewPhoto">照片</button>
+        </div>
+        <p class="cat-portrait-hint" data-i18n="hero.catHint">拖拽旋转 · 点我喵一下</p>
       </div>
     </div>
 
@@ -354,7 +358,8 @@
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/></svg>
   </button>
 
-  <script src="assets/js/cat-hero.js" defer></script>
+  <script src="assets/js/three.min.js" defer></script>
+  <script src="assets/js/cat3d.js" defer></script>
   <script src="assets/js/gsap.min.js"></script>
   <script src="assets/js/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>

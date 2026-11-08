@@ -11,7 +11,7 @@
   "hero.scrollHint": "Scroll down",
   "hero.ctaPrimary": "View My Projects",
   "hero.ctaGhost": "Get In Touch",
-  "hero.catHint": "Move your cursor · Tap to meow",
+  "hero.catHint": "Drag to rotate · Tap to meow",
   "hero.stat1.label": "Experience",
   "hero.stat1.value": "1.5+",
   "hero.stat1.unit": "yr",
@@ -102,5 +102,7 @@
   "contact.title": "Say Hello!",
   "contact.sub": "Neko is friendly and won't scratch (probably).",
   "contact.email": "Email",
-  "footer.text": "© YEAR Zhihao Meng · Built with ❤️ and code"
+  "footer.text": "© YEAR Zhihao Meng · Built with ❤️ and code",
+  "hero.view3d": "3D",
+  "hero.viewPhoto": "Photo"
 }
